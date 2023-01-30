@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Auth\RegisterUserRequest;
 use Illuminate\Http\Request;
 
 class RegisterUserController extends Controller
@@ -16,7 +17,7 @@ class RegisterUserController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(RegisterUserRequest $request)
     {
         dd($request);
     }

@@ -22,38 +22,38 @@
 
 
         <p>First Name</p>
-        <input type="text" class="w-100 p-3 bg-red-300" name="first_name">
+        <input type="text" value="{{ old('first_name') }}"  class="w-100 p-3 bg-gray-300" name="first_name")>
         @error('first_name')
-        <div class="alert alert-danger">{{ $message }}</div>
+        <div class="alert alert-danger text-red-600">{{ $message }}</div>
         @enderror
 
         <p>Last Name</p>
-        <input type="text" class="w-100 p-3 bg-red-300" name="last_name">
+        <input type="text" value="{{ old('last_name') }}" class="w-100 p-3 bg-gray-300" name="last_name">
         @error('last_name')
-        <div class="alert alert-danger">{{ $message }}</div>
+        <div class="alert alert-danger text-red-600">{{ $message }}</div>
         @enderror
 
         <p>Email</p>
-        <input type="email" class="w-100 p-3 bg-red-300" name="email">
+        <input type="email" value="{{ old('email') }}" class="w-100 p-3 bg-gray-300" name="email">
         @error('email')
-        <div class="alert alert-danger">{{ $message }}</div>
+        <div class="alert alert-danger text-red-600">{{ $message }}</div>
         @enderror
 
         <p>password</p>
-        <input type="password" class="w-100 p-3 bg-red-300" name="password">
+        <input type="password" value="{{ old('password') }}" class="w-100 p-3 bg-gray-300" name="password">
         @error('password')
-        <div class="alert alert-danger">{{ $message }}</div>
+        <div class="alert alert-danger text-red-600">{{ $message }}</div>
         @enderror
 
         <p>confirm password</p>
-        <input type="password" class="w-100 p-3 bg-red-300" name="password_confirmation">
+        <input type="password" value="{{ old('password_confirmation') }}" class="w-100 p-3 bg-gray-300" name="password_confirmation">
         @error('password_confirmation')
-        <div class="alert alert-danger">{{ $message }}</div>
+        <div class="alert alert-danger text-red-600">{{ $message }}</div>
         @enderror
 
 
         <p></p>
-        <input type="submit" class="w-100 p-3 bg-red-300 mt-6 bg-slate-700 text-white">
+        <input type="submit" class="w-100 p-3 bg-gray-300 mt-6 bg-slate-700 text-white">
 
     </form>
 
