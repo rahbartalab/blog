@@ -19,8 +19,11 @@ Route::get('/', function () {
 
 
 /* --!> authentication routes <!-- */
-Route::get('/register' ,[\App\Http\Controllers\RegisterUserController::class , 'index']);
-Route::post('/register' , [\App\Http\Controllers\RegisterUserController::class , 'store']);
+Route::get('/register', [\App\Http\Controllers\RegisterUserController::class, 'index'])->name('register');
+Route::post('/register', [\App\Http\Controllers\RegisterUserController::class, 'store']);
 
+
+Route::get('/login', []);
+Route::post('login', []);
 
 
