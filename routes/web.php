@@ -1,5 +1,7 @@
 <?php
 
+use App\Mail\RegisterMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +29,8 @@ Route::get('/login', []);
 Route::post('login', []);
 
 
+///* --!> test routes <!-- */
+//Route::get('/mail', function () {
+//
+//    return new RegisterMail();
+//});
