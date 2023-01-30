@@ -22,15 +22,10 @@ class RegisterUserController extends Controller
 
     public function store(RegisterUserRequest $request)
     {
-        $validated =
-        DB::table('users')
-            ->insert([
-                'first_name' => $request['first_name'],
-                'last_name' => $request['last_name'],
-                'email' => $request['email'],
-                'password' => Hash::make($request['password'])
-            ]);
+        $user = $request->except('password_confirmation');
+        User::create($user);
 
-        return redirect('login');
+
+        return redirect('register');
     }
 }
