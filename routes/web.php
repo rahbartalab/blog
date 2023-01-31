@@ -1,7 +1,7 @@
 <?php
 
-use App\Mail\RegisterMail;
-use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\Auth\LoginUserController;
+use App\Http\Controllers\Auth\RegisterUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,12 +21,12 @@ Route::get('/', function () {
 
 
 /* --!> authentication routes <!-- */
-Route::get('/register', [\App\Http\Controllers\RegisterUserController::class, 'index'])->name('register');
-Route::post('/register', [\App\Http\Controllers\RegisterUserController::class, 'store']);
+Route::get('/register', [RegisterUserController::class, 'index'])->name('register');
+Route::post('/register', [RegisterUserController::class, 'store']);
 
 
-Route::get('/login', []);
-Route::post('login', []);
+Route::get('/login', [LoginUserController::class, 'index'])->name('login');
+Route::post('login', [LoginUserController::class, 'store']);
 
 
 ///* --!> test routes <!-- */

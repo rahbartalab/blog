@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterUserRequest;
 use App\Mail\RegisterMail;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use function redirect;
+use function view;
 
 class RegisterUserController extends Controller
 {
@@ -29,6 +29,6 @@ class RegisterUserController extends Controller
         Mail::to($user['email'])->send(new RegisterMail());
 
 
-        return redirect('register');
+        return redirect('login');
     }
 }
