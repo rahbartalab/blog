@@ -32,7 +32,7 @@ class RegisterUserController extends Controller
             "email" => $request['email'],
             "password" => Hash::make($request['password'])
         ]);
-//        Mail::to($user['email'])->send(new RegisterMail());
+        Mail::to($user['email'])->send(new RegisterMail());
 
 
         return redirect('login');
