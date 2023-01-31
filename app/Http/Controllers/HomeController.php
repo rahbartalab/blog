@@ -15,4 +15,9 @@ class HomeController extends Controller
             "username" => Auth::user()->first_name
         ]);
     }
+
+    public function home()
+    {
+        return view('home');
+    }
 }

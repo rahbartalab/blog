@@ -17,11 +17,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', [HomeController::class, 'home'])->name('home');
 
 /* --!> authentication routes <!-- */
 Route::get('/register', [RegisterUserController::class, 'index'])->name('register')->middleware('guest');
@@ -34,6 +30,7 @@ Route::post('login', [LoginUserController::class, 'store'])->middleware('guest')
 Route::post('logout', [UserController::class, 'logout'])->middleware('auth');
 
 Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard')->middleware('auth');
+
 
 ///* --!> test routes <!-- */
 //Route::get('/mail', function () {
