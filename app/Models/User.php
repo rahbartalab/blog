@@ -10,6 +10,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @method static where(string $string, mixed $email)
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -46,10 +49,4 @@ class User extends Authenticatable
     ];
 
 
-    protected function password(): Attribute
-    {
-        return Attribute::make(
-            set: fn($value) => Hash::make($this->password),
-        );
-    }
 }

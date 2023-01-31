@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginUserController;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\RegisterUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +30,7 @@ Route::post('/register', [RegisterUserController::class, 'store']);
 Route::get('/login', [LoginUserController::class, 'index'])->name('login');
 Route::post('login', [LoginUserController::class, 'store']);
 
+Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 
 ///* --!> test routes <!-- */
 //Route::get('/mail', function () {
