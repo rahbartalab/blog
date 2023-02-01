@@ -13,15 +13,13 @@ class RegisterUserController extends Controller
 {
     public function index()
     {
-
-
         return view('auth.register');
     }
 
 
     public function store(RegisterUserRequest $request)
     {
-        $user = User::create([
+        User::create([
             'first_name' => $request['first_name'],
             'last_name' => $request['last_name'],
             'email' => $request['email'],
