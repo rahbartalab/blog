@@ -10,7 +10,7 @@
 <body>
 
 <div class="text-center p-12 flex justify-center gap-12">
-    <p>WELCOME {{ $username }}</p>
+    <p>WELCOME {{ $user->username }}</p>
 
     <form action="/logout" method="post">
         @csrf
