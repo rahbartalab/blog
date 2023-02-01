@@ -6,12 +6,10 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-
-
     public function dashboard()
     {
         return view('dashboard', [
-            "username" => Auth::user()->first_name
+            'username' => Auth::user()->first_name
         ]);
     }
 
