@@ -3,8 +3,6 @@
 use App\Http\Controllers\Auth\LoginUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\RegisterUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,21 +18,21 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
-/* --!> authentication routes <!-- */
-Route::get('/register', [RegisterUserController::class, 'index'])->name('register')->middleware('guest');
-Route::post('/register', [RegisterUserController::class, 'store'])->middleware('guest');
+Route::middleware('guest')->group(function () {
+    Route::prefix('register')->group(function () {
+        Route::get('/', [RegisterUserController::class, 'index'])->name('register');
+        Route::post('/', [RegisterUserController::class, 'store']);
+    });
+
+    Route::prefix('login')->group(function () {
+        Route::get('/', [LoginUserController::class, 'index'])->name('login');
+        Route::post('/', [LoginUserController::class, 'store']);
+    });
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [UserController::class, 'logout']);
+    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+});
 
 
-Route::get('/login', [LoginUserController::class, 'index'])->name('login')->middleware('guest');
-Route::post('login', [LoginUserController::class, 'store'])->middleware('guest');
-
-Route::post('logout', [UserController::class, 'logout'])->middleware('auth');
-
-Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard')->middleware('auth');
-
-
-///* --!> test routes <!-- */
-//Route::get('/mail', function () {
-//
-//    return new RegisterMail();
-//});
