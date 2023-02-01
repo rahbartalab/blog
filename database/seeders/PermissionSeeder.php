@@ -42,26 +42,26 @@ class PermissionSeeder extends Seeder
 //                'created_at' => Carbon::now(),
 //            ]
             [
-                'name' => 'show-managers',
+                'name' => 'show-role',
                 'slug' => 'نمایش مدیران',
                 'guard_name' => 'web',
                 'created_at' => Carbon::now()
             ]
             ,
             [
-                'name' => 'add-manager',
+                'name' => 'add-role',
                 'slug' => 'افزودن مدیر',
                 'guard_name' => 'web',
                 'created_at' => Carbon::now(),
             ],
             [
-                'name' => 'edit-manager',
+                'name' => 'edit-role',
                 'slug' => 'ویرایش مدیر',
                 'guard_name' => 'web',
                 'created_at' => Carbon::now(),
             ],
             [
-                'name' => 'delete-manager',
+                'name' => 'delete-role',
                 'slug' => 'حذف مدیر',
                 'guard_name' => 'web',
                 'created_at' => Carbon::now(),

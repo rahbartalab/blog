@@ -24,7 +24,7 @@ class RoleSeeder extends Seeder
                 'created_at' => Carbon::now(),
             ],
             [
-                'name' => 'manager',
+                'name' => 'role',
                 'slug' => 'مدیر',
                 'guard_name' => 'web',
                 'created_at' => Carbon::now(),
