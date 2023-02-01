@@ -33,7 +33,8 @@ class CreateRoleRequest extends FormRequest
     public function messages()
     {
         return [
-            'name' => 'لطفا نام نقش را انتخاب کنید',
+            'required' => 'لطفا نام نقش را انتخاب کنید',
+            'unique' => 'این نقش قبلا افزوده شده است',
             'permissions' => 'برای ساخت یک نقش جدید حداقل یک دسترسی مورد نیاز است'
         ];
     }

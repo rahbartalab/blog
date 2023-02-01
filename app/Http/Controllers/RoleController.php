@@ -5,23 +5,23 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateRoleRequest;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        return view('roles.index', [
+            "roles" => Role::all()
+        ]);
     }
 
     public function create()
     {
-
-
         return view('roles.create', [
             'permissions' => Permission::all()
         ]);
@@ -31,11 +31,14 @@ class RoleController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
      */
     public function store(CreateRoleRequest $request)
     {
-        dd($request->all());
+        /* @var $role Role */
+        $role = Role::create(array_merge($request->validated(), ['slug' => \Str::slug($request['name'])]));
+        $role->givePermissionTo($request['permissions']);
+
+        return redirect(route('roles.index'));
     }
 
     /**
