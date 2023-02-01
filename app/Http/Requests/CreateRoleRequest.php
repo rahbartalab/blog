@@ -29,4 +29,12 @@ class CreateRoleRequest extends FormRequest
             'permissions' => ['required']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name' => 'لطفا نام نقش را انتخاب کنید',
+            'permissions' => 'برای ساخت یک نقش جدید حداقل یک دسترسی مورد نیاز است'
+        ];
+    }
 }
