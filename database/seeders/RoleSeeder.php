@@ -18,25 +18,25 @@ class RoleSeeder extends Seeder
     {
         DB::table('roles')->insert([
             [
-                'name' => 'admin',
-                'slug' => 'ادمین',
+                'name' => 'ادمین',
+                'slug' => 'admin',
                 'guard_name' => 'web',
                 'created_at' => Carbon::now(),
             ],
             [
-                'name' => 'role',
-                'slug' => 'مدیر',
+                'name' => 'مدیر',
+                'slug' => 'role',
                 'guard_name' => 'web',
                 'created_at' => Carbon::now(),
             ], [
-                'name' => 'teacher',
-                'slug' => 'معلم',
+                'name' => 'معلم',
+                'slug' => 'teacher',
                 'guard_name' => 'web',
                 'created_at' => Carbon::now(),
             ],
             [
-                'name' => 'student',
-                'slug' => 'دانش آموز',
+                'name' => 'دانش آموز',
+                'slug' => 'student',
                 'guard_name' => 'web',
                 'created_at' => Carbon::now(),
             ],
