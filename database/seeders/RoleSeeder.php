@@ -39,7 +39,7 @@ class RoleSeeder extends Seeder
                 'slug' => 'دانش آموز',
                 'guard_name' => 'web',
                 'created_at' => Carbon::now(),
-            ]
+            ],
         ]);
     }
 }

@@ -17,27 +17,52 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         DB::table('permissions')->insert([
+//            [
+//                'name' => 'create-user',
+//                'slug' => 'ساخت دانش آموز جدید',
+//                'guard_name' => 'web',
+//                'created_at' => Carbon::now(),
+//            ],
+//            [
+//                'name' => 'show-students',
+//                'slug' => 'نمایش دانش آموزان',
+//                'guard_name' => 'web',
+//                'created_at' => Carbon::now(),
+//            ],
+//            [
+//                'name' => 'apply-grade',
+//                'slug' => 'ثبت نمره',
+//                'guard_name' => 'web',
+//                'created_at' => Carbon::now(),
+//            ],
+//            [
+//                'name' => 'remove-student',
+//                'slug' => 'حذف دانش آموز',
+//                'guard_name' => 'web',
+//                'created_at' => Carbon::now(),
+//            ]
             [
-                'name' => 'create-user',
-                'slug' => 'ساخت دانش آموز جدید',
+                'name' => 'show-managers',
+                'slug' => 'نمایش مدیران',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now()
+            ]
+            ,
+            [
+                'name' => 'add-manager',
+                'slug' => 'افزودن مدیر',
                 'guard_name' => 'web',
                 'created_at' => Carbon::now(),
             ],
             [
-                'name' => 'show-students',
-                'slug' => 'نمایش دانش آموزان',
+                'name' => 'edit-manager',
+                'slug' => 'ویرایش مدیر',
                 'guard_name' => 'web',
                 'created_at' => Carbon::now(),
             ],
             [
-                'name' => 'apply-grade',
-                'slug' => 'ثبت نمره',
-                'guard_name' => 'web',
-                'created_at' => Carbon::now(),
-            ],
-            [
-                'name' => 'remove-student',
-                'slug' => 'حذف دانش آموز',
+                'name' => 'delete-manager',
+                'slug' => 'حذف مدیر',
                 'guard_name' => 'web',
                 'created_at' => Carbon::now(),
             ]
