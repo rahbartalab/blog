@@ -17,23 +17,23 @@ class PermissionSeeder extends Seeder
     {
         DB::table('permissions')->insert([
             [
-                'name' => 'ساخت دانش آموز جدید',
-                'slug' => 'create-user',
+                'name' => 'create-user',
+                'slug' => 'ساخت دانش آموز جدید',
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'نمایش دانش آموزان',
-                'slug' => 'show-students',
+                'name' => 'show-students',
+                'slug' => 'نمایش دانش آموزان',
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'ثبت نمره',
-                'slug' => 'apply-grade',
+                'name' => 'apply-grade',
+                'slug' => 'ثبت نمره',
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'حذف دانش آموز',
-                'slug' => 'remove-student',
+                'name' => 'remove-student',
+                'slug' => 'حذف دانش آموز',
                 'guard_name' => 'web'
             ]
         ]);

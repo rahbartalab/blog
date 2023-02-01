@@ -34,5 +34,3 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [UserController::class, 'logout']);
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 });
-
-
