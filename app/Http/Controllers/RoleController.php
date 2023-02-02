@@ -42,18 +42,20 @@ class RoleController extends Controller
 
     public function edit($id)
     {
-        //
+        dd($id);
     }
 
 
     public function update(Request $request, $id)
     {
-        //
+        dd($id);
     }
 
 
     public function destroy($id)
     {
-        //
+        Role::findById($id)->delete();
+
+        return redirect(route('roles.index'));
     }
 }
