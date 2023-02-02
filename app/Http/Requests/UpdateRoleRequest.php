@@ -32,7 +32,7 @@ class UpdateRoleRequest extends FormRequest
             ],
             /* --!> we want array of integer (permissions id) <!-- */
             'permissions' => ['required', 'array'],
-            'permissions.*' => ['exists:permissions,id']
+            'permissions.*' => ['int ', 'exists:permissions,id']
         ];
     }
 

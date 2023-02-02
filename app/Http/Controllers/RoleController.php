@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Permission;
 use App\Models\Role;
 
@@ -49,10 +50,11 @@ class RoleController extends Controller
         ]);
     }
 
-
     public function update(UpdateRoleRequest $request, $id)
     {
-        dd($id);
+        Role::findById($id)->syncPermissions($request['permissions']);
+
+        return redirect(route('roles.edit', $id));
     }
 
 
