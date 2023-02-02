@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateRoleRequest;
+use App\Http\Requests\UpdateRoleRequest;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use App\Models\Role;
@@ -42,11 +43,14 @@ class RoleController extends Controller
 
     public function edit($id)
     {
-        dd($id);
+        return view('roles.edit', [
+            "role" => Role::findById($id),
+            "permissions" => Permission::all()
+        ]);
     }
 
 
-    public function update(Request $request, $id)
+    public function update(UpdateRoleRequest $request, $id)
     {
         dd($id);
     }
