@@ -52,7 +52,7 @@ class RoleController extends Controller
 
     public function update(UpdateRoleRequest $request, $id)
     {
-        Role::findById($id)->syncPermissions($request['permissions']);
+        Role::findById($id)->syncPermissions($request['permissions'])->update($request->validated());
 
         return redirect(route('roles.edit', $id));
     }
