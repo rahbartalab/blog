@@ -25,8 +25,13 @@ class CreateRoleRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'min:3', 'max:255', Rule::unique('roles', 'name')],
-            'permissions' => ['required']
+            'name' => [
+                'required', 'string', 'min:3', 'max:255',
+                Rule::unique('roles', 'name')
+            ],
+            /* --!> we want array of integer (permissions id) <!-- */
+            'permissions' => ['required', 'array'],
+            'permissions.*' => ['exists:permissions,id']
         ];
     }
 
