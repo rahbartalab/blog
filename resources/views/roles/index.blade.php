@@ -41,7 +41,9 @@
                                 {{ $role['id'] }}
                             </td>
                             <td class="px-6 text-left font-semibold py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                {{ $role['name'] }}
+                                <a href="{{ route('roles.show' , $role['id']) }}">
+                                    {{ $role['name'] }}
+                                </a>
                             </td>
                             <td class="px-6 text-left py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                 {{ $role['slug'] }}

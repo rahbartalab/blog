@@ -36,15 +36,17 @@ class RoleController extends Controller
 
     public function show($id)
     {
-        //
+        return view('roles.show', [
+            'role' => Role::findById($id)
+        ]);
     }
 
 
     public function edit($id)
     {
         return view('roles.edit', [
-            "role" => Role::findById($id),
-            "permissions" => Permission::all()
+            'role' => Role::findById($id),
+            'permissions' => Permission::all()
         ]);
     }
 
