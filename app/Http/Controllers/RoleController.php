@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateRoleRequest;
-use App\Http\Requests\UpdateRoleRequest;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use Spatie\Permission\Models\Permission;
+use App\Http\Requests\Role\CreateRoleRequest;
+use App\Http\Requests\Role\UpdateRoleRequest;
 use App\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {

@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Mail\RegisterMail;
+use App\Mail\Auth\RegisterMail;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 

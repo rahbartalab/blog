@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Role;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -32,15 +32,6 @@ class CreateRoleRequest extends FormRequest
             /* --!> we want array of integer (permissions id) <!-- */
             'permissions' => ['required', 'array'],
             'permissions.*' => ['int', 'exists:permissions,id']
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'required' => 'لطفا نام نقش را انتخاب کنید',
-            'unique' => 'این نقش قبلا افزوده شده است',
-            'permissions' => 'برای ساخت یک نقش جدید حداقل یک دسترسی مورد نیاز است'
         ];
     }
 }

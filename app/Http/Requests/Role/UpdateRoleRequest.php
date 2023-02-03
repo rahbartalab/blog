@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Role;
 
-use App\Models\Role;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -33,13 +32,6 @@ class UpdateRoleRequest extends FormRequest
             /* --!> we want array of integer (permissions id) <!-- */
             'permissions' => ['required', 'array'],
             'permissions.*' => ['int ', 'exists:permissions,id']
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'unique' => 'این نام قبلا انتخاب شده است'
         ];
     }
 }
