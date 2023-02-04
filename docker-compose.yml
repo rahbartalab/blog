@@ -41,13 +41,21 @@ services:
         networks:
             - sail
         healthcheck:
-            test: ["CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}"]
+            test: [ "CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}" ]
             retries: 3
             timeout: 5s
 
+    redis:
+        image: redis:latest
+        ports:
+            - "6379:6379"
+        networks:
+            - sail
+
+
     phpmyadmin:
         depends_on:
-            -   mysql
+            - mysql
         image: phpmyadmin/phpmyadmin
         environment:
             - PMA_HOST=mysql
