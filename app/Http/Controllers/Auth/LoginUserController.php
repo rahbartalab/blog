@@ -16,8 +16,7 @@ class LoginUserController extends Controller
 
     public function store(LoginUserRequest $request)
     {
-        $credentials = $request->validated();
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($request->validated())) {
             $request->session()->regenerate();
 
             return redirect()->intended(route('dashboard'));
