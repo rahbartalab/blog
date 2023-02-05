@@ -30,7 +30,7 @@ class RoleController extends Controller
         /* @var $role Role */
 
         try {
-            $role = Role::create(array_merge($request->validated(), ['slug' => \Str::slug($request->get('name'))]));
+            $role = Role::create(array_merge($request->validated(), ['slug' => Role::createSlug($request->get('name'))]));
             $role->givePermissionTo($request->get('permissions'));
         } catch (Exception $exception) {
             return redirect()->back(500);

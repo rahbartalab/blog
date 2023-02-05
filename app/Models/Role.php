@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role as SpatieRole;
 
 /**
@@ -29,6 +30,14 @@ class Role extends SpatieRole
             fn($query) => $query->whereHas('permissions',
                 fn($query) => $query->whereIn('id', request('permissions'))
             ));
+    }
+
+    public static function createSlug($name)
+    {
+        if (static::whereSlug($slug = Str::slug($name))->exists()) {
+            $slug = $slug . '-1';
+        }
+        return $slug;
     }
 
 }
