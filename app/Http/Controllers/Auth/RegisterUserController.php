@@ -21,6 +21,6 @@ class RegisterUserController extends Controller
     {
         User::create($request->validated());
 
-        return redirect(route('login'));
+        return redirect()->route('login.index');
     }
 }

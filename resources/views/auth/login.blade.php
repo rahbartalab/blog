@@ -13,7 +13,7 @@
 
 <div class="w-3/4 mx-auto p-5 text-center">
 
-    <form action="/login" method="post">
+    <form action="{{ route('login.store') }}" method="post">
         @csrf
         @method('POST')
 

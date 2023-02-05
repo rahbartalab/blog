@@ -21,18 +21,18 @@ Route::get('/', [HomeController::class, 'home'])->name('home');
 
 Route::middleware('guest')->group(function () {
     Route::prefix('register')->group(function () {
-        Route::get('/', [RegisterUserController::class, 'index'])->name('register');
-        Route::post('/', [RegisterUserController::class, 'store']);
+        Route::get('/', [RegisterUserController::class, 'index'])->name('register.index');
+        Route::post('/', [RegisterUserController::class, 'store'])->name('register.store');
     });
 
     Route::prefix('login')->group(function () {
-        Route::get('/', [LoginUserController::class, 'index'])->name('login');
-        Route::post('/', [LoginUserController::class, 'store']);
+        Route::get('/', [LoginUserController::class, 'index'])->name('login.index');
+        Route::post('/', [LoginUserController::class, 'store'])->name('login.store');
     });
 });
 
 Route::middleware('auth')->group(function () {
-    Route::post('/logout', [UserController::class, 'logout']);
+    Route::post('/logout', [UserController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     /* --!> manager role <!-- */
     Route::resource('roles', RoleController::class);

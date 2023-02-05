@@ -12,7 +12,7 @@
 <div class="text-center p-12 flex justify-center gap-12">
     <p>WELCOME {{ $user->username }}</p>
 
-    <form action="/logout" method="post">
+    <form action="{{ route('logout') }}" method="post">
         @csrf
         <input type="submit" class="bg-slate-700 text-white px-4 py-2 rounded cursor-pointer" value="logout">
     </form>
