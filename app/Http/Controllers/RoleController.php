@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Role\CreateRoleRequest;
 use App\Http\Requests\Role\UpdateRoleRequest;
 use App\Models\Role;
+use PHPUnit\Exception;
 use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
@@ -27,8 +28,14 @@ class RoleController extends Controller
     public function store(CreateRoleRequest $request)
     {
         /* @var $role Role */
-        $role = Role::create(array_merge($request->validated(), ['slug' => \Str::slug($request->get('name'))]));
-        $role->givePermissionTo($request->get('permissions'));
+
+        try {
+            $role = Role::create(array_merge($request->validated(), ['slug' => \Str::slug($request->get('name'))]));
+            $role->givePermissionTo($request->get('permissions'));
+        } catch (Exception $exception) {
+            return redirect()->back(500);
+        }
+
 
         return redirect()->route('roles.index');
     }
@@ -37,7 +44,7 @@ class RoleController extends Controller
     public function show($id)
     {
         return view('roles.show', [
-            'role' => Role::findById($id)
+            'role' => Role::findOrFail($id)
         ]);
     }
 
@@ -45,14 +52,14 @@ class RoleController extends Controller
     public function edit($id)
     {
         return view('roles.edit', [
-            'role' => Role::findById($id),
+            'role' => Role::findOrFail($id),
             'permissions' => Permission::all()
         ]);
     }
 
     public function update(UpdateRoleRequest $request, $id)
     {
-        Role::findById($id)->syncPermissions($request['permissions'])->update($request->validated());
+        Role::findOrFail($id)->syncPermissions($request->get('permissions'))->update($request->validated());
 
         return redirect()->route('roles.edit', $id);
     }
@@ -60,7 +67,7 @@ class RoleController extends Controller
 
     public function destroy($id)
     {
-        Role::findById($id)->delete();
+        Role::findOrFail($id)->delete();
 
         return redirect()->route('roles.index');
     }

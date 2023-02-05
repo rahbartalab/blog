@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Permission\Models\Role as SpatieRole;
 
+/**
+ * @method static findOrFail($id)
+ */
 class Role extends SpatieRole
 {
     use HasFactory, SoftDeletes;

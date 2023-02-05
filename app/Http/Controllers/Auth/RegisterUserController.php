@@ -19,7 +19,11 @@ class RegisterUserController extends Controller
 
     public function store(RegisterUserRequest $request)
     {
-        User::create($request->validated());
+        try {
+            User::create($request->validated());
+        } catch (\Exception $exception) {
+            return redirect()->back(500);
+        }
 
         return redirect()->route('login.index');
     }
