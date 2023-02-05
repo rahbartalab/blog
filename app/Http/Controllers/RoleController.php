@@ -27,10 +27,10 @@ class RoleController extends Controller
     public function store(CreateRoleRequest $request)
     {
         /* @var $role Role */
-        $role = Role::create(array_merge($request->validated(), ['slug' => \Str::slug($request['name'])]));
-        $role->givePermissionTo($request['permissions']);
+        $role = Role::create(array_merge($request->validated(), ['slug' => \Str::slug($request->get('name'))]));
+        $role->givePermissionTo($request->get('permissions'));
 
-        return redirect(route('roles.index'));
+        return redirect()->route('roles.index');
     }
 
 
@@ -54,7 +54,7 @@ class RoleController extends Controller
     {
         Role::findById($id)->syncPermissions($request['permissions'])->update($request->validated());
 
-        return redirect(route('roles.edit', $id));
+        return redirect()->route('roles.edit', $id);
     }
 
 
@@ -62,6 +62,6 @@ class RoleController extends Controller
     {
         Role::findById($id)->delete();
 
-        return redirect(route('roles.index'));
+        return redirect()->route('roles.index');
     }
 }
