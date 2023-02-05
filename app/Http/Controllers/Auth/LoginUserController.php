@@ -16,14 +16,20 @@ class LoginUserController extends Controller
 
     public function store(LoginUserRequest $request)
     {
-        if (Auth::attempt($request->validated())) {
-            $request->session()->regenerate();
+        try {
+            if (Auth::attempt($request->validated())) {
+                $request->session()->regenerate();
 
-            return redirect()->intended(route('dashboard'));
+                return redirect()->intended(route('dashboard'));
+            }
+
+            return back()->withErrors([
+                'email' => 'The provided credentials do not match our records.',
+            ])->onlyInput('email');
+
+        } catch (\Exception $exception) {
+            return redirect()->back(500);
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
     }
 }
