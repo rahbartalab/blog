@@ -10,6 +10,12 @@
     <title>Roles list</title>
 </head>
 <body>
+<div class="text-center p-12">
+    <a class="bg-slate-700 rounded px-12 py-2 text-white my-6 mx-auto mt-6" href="{{ route('dashboard') }}">پنل
+        کاربری</a>
+</div>
+
+
 <div class="flex flex-col w-3/4 mx-auto mt-12">
     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">

@@ -12,6 +12,8 @@
 <div class="text-center p-12 gap-12">
     <p>ویرایش نقش</p>
 
+    <a class="bg-slate-700 rounded px-12 py-2 text-white my-6" href="{{ route('dashboard') }}">پنل کاربری</a>
+
     <form action="{{ route('roles.update' , $role['id']) }}" method="post">
         @csrf
         @method('PATCH')

@@ -10,7 +10,9 @@
 <body>
 
 <div class="text-center p-12 gap-12">
-    <p>ساخت نقش جدید</p>
+    <p class="mb-12">ساخت نقش جدید</p>
+
+    <a class="bg-slate-700 rounded px-12 py-2 text-white" href="{{ route('dashboard') }}">پنل کاربری</a>
 
     <form action="/roles" method="post">
         @csrf

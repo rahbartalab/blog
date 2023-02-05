@@ -10,6 +10,9 @@
     <title>Show Role</title>
 </head>
 <body>
+
+<a class="bg-slate-700 rounded px-12 py-2 text-white my-6" href="{{ route('dashboard') }}">پنل کاربری</a>
+
 <div class="text-center">
     <div class="border-b flex gap-12 justify-center mt-12">
         <td class="px-6 text-left py-4 whitespace-nowrap text-sm font-medium text-gray-900">
