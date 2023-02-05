@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\users\CreateUserRequest;
+use App\Http\Requests\users\UpdateUserRequest;
 use App\Models\Role;
 use App\Models\User;
+use http\Env\Request;
 use Illuminate\Support\Facades\Auth;
 use function redirect;
 
@@ -57,9 +59,15 @@ class UserController extends Controller
         ]);
     }
 
-    public function update()
+    public function update(UpdateUserRequest $request, $id)
     {
+        try {
+            User::findOrFail($id)->syncRoles($request->get('role'))->update(array_filter($request->all()));
+        } catch (\Exception $exception) {
+            return redirect()->back(500);
+        }
 
+        return redirect()->route('users.index');
     }
 
     public function delete()

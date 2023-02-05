@@ -30,7 +30,7 @@ class CreateUserRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'min:3', 'max:255', Rule::unique('users')],
             'password' => ['required', 'same:password_confirmation', 'required_with:password_confirmation', 'min:6'],
             'password_confirmation' => ['required', 'min:6'],
-            'role' => ['nullable','int', 'exists:roles,id']
+            'role' => ['nullable', 'int', 'exists:roles,id']
         ];
     }
 }
