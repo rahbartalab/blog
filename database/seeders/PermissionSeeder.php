@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Permission;
 
 class PermissionSeeder extends Seeder
 {
@@ -16,31 +17,7 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('permissions')->insert([
-//            [
-//                'name' => 'create-user',
-//                'slug' => 'ساخت دانش آموز جدید',
-//                'guard_name' => 'web',
-//                'created_at' => Carbon::now(),
-//            ],
-//            [
-//                'name' => 'show-students',
-//                'slug' => 'نمایش دانش آموزان',
-//                'guard_name' => 'web',
-//                'created_at' => Carbon::now(),
-//            ],
-//            [
-//                'name' => 'apply-grade',
-//                'slug' => 'ثبت نمره',
-//                'guard_name' => 'web',
-//                'created_at' => Carbon::now(),
-//            ],
-//            [
-//                'name' => 'remove-student',
-//                'slug' => 'حذف دانش آموز',
-//                'guard_name' => 'web',
-//                'created_at' => Carbon::now(),
-//            ]
+        Db::table('permissions')->insert([
             [
                 'name' => 'نمایش مدیران',
                 'slug' => 'show-role',

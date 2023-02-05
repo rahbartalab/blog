@@ -10,13 +10,14 @@
 <body>
 
 <div class="text-center p-12 flex flex-col justify-center gap-12">
-    <p>WELCOME {{ $user->username }}</p>
+    <p>WELCOME {{ $user->first_name }}</p>
 
     <form action="{{ route('logout') }}" method="post">
         @csrf
         <input type="submit" class="bg-slate-700 text-white px-4 py-2 rounded cursor-pointer" value="logout">
     </form>
 
+    @role('admin')
     <div class="flex gap-4 flex-col">
         <div>
             <a class="rounded px-12 py-4 text-blue-500 w-36" href="{{ route('roles.index') }}">لیست نقش ها</a>
@@ -25,6 +26,7 @@
             <a class="rounded px-12 py-4 text-blue-500 w-36" href="{{ route('roles.create') }}">افزودن نقش</a>
         </div>
     </div>
+    @endrole
 </div>
 
 </body>
