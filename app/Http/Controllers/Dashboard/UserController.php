@@ -7,12 +7,17 @@ use App\Http\Requests\users\CreateUserRequest;
 use App\Http\Requests\users\UpdateUserRequest;
 use App\Models\Role;
 use App\Models\User;
-use http\Env\Request;
+use App\Policies\User\UserPolicy;
 use Illuminate\Support\Facades\Auth;
 use function redirect;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(User::class);
+    }
+
     public function logout()
     {
         Auth::logout();

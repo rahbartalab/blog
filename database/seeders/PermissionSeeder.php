@@ -19,36 +19,55 @@ class PermissionSeeder extends Seeder
     {
         Db::table('permissions')->insert([
             [
-                'name' => 'نمایش مدیران',
+                'name' => 'نمایش کاربران',
                 'slug' => 'show-role',
                 'guard_name' => 'web',
                 'created_at' => Carbon::now()
             ]
             ,
             [
-                'name' => 'افزودن مدیر',
+                'name' => 'افزودن کاربر',
                 'slug' => 'add-role',
                 'guard_name' => 'web',
                 'created_at' => Carbon::now(),
             ],
             [
-                'name' => 'ویرایش مدیر',
+                'name' => 'ویرایش کاربر',
                 'slug' => 'edit-role',
                 'guard_name' => 'web',
                 'created_at' => Carbon::now(),
             ],
             [
-                'name' => 'حذف مدیر',
+                'name' => 'حذف کاربر',
                 'slug' => 'delete-role',
                 'guard_name' => 'web',
                 'created_at' => Carbon::now(),
             ],
             [
-                'name' => 'نمایش کاربران',
-                'slug' => 'show-users',
+                'name' => 'نمایش نقش ها',
+                'slug' => 'show-role',
                 'guard_name' => 'web',
                 'created_at' => Carbon::now()
             ]
+            ,
+            [
+                'name' => 'افزودن نقش',
+                'slug' => 'add-role',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'ویرایش نقش',
+                'slug' => 'edit-role',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'حذف نقش',
+                'slug' => 'delete-role',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+            ],
         ]);
     }
 }
