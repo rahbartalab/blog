@@ -36,5 +36,6 @@ Route::middleware('auth')->group(function () {
     /* --!> manager role <!-- */
     Route::middleware('role:admin')->group(function () {
         Route::resource('roles', RoleController::class);
+        Route::resource('users', UserController::class);
     });
 });

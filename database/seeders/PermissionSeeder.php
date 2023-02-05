@@ -42,6 +42,12 @@ class PermissionSeeder extends Seeder
                 'slug' => 'delete-role',
                 'guard_name' => 'web',
                 'created_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'نمایش کاربران',
+                'slug' => 'show-users',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now()
             ]
         ]);
     }
