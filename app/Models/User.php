@@ -6,6 +6,7 @@ namespace App\Models;
 use App\Casts\Auth\PasswordCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -100,7 +101,9 @@ class User extends Authenticatable
     {
         /* --!> name filter <!-- */
         $query->when(\request('name') ?? false,
-            fn($query) => $query->where('name', 'LIKE', '%' . \request('name') . '%'));
+            fn($query) => $query->where('first_name', 'LIKE', '%' . \request('name') . '%')
+                ->orWhere('last_name', 'LIKE', '%' . \request('name') . '%')
+        );
 
         /* --!> role filtering <!-- */
         $query->when(request('role') ?? false,
