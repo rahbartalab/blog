@@ -96,4 +96,17 @@ class User extends Authenticatable
     ];
 
 
+    public function scopeFilter($query)
+    {
+        /* --!> name filter <!-- */
+        $query->when(\request('name') ?? false,
+            fn($query) => $query->where('name', 'LIKE', '%' . \request('name') . '%'));
+
+        /* --!> role filtering <!-- */
+        $query->when(request('role') ?? false,
+            fn($query) => $query->whereHas('roles',
+                fn($query) => $query->where('id', request('role'))
+            ));
+    }
+
 }
