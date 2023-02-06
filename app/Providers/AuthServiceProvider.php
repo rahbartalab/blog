@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
-use App\Http\Controllers\Dashboard\UserController;
 use App\Models\Role;
 use App\Models\User;
 use App\Policies\Role\RolePolicy;

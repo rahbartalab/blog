@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Role;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Role\CreateRoleRequest;
 use App\Http\Requests\Role\UpdateRoleRequest;
 use App\Models\Role;
 use PHPUnit\Exception;
 use Spatie\Permission\Models\Permission;
+use function redirect;
+use function view;
 
 class RoleController extends Controller
 {
@@ -35,8 +38,12 @@ class RoleController extends Controller
         /* @var $role Role */
 
         try {
-            $role = Role::create(array_merge($request->validated(), ['slug' => Role::createSlug($request->get('name'))]));
+            /* --!> merging validated data with slug : user give all data ,but we must create slug for every role <!-- */
+            $data = array_merge($request->validated(), ['slug' => Role::createSlug($request->get('name'))]);
+
+            $role = Role::create($data);
             $role->givePermissionTo($request->get('permissions'));
+
         } catch (Exception $exception) {
             \Log::error($exception->getMessage());
             return redirect()->route('roles.create')->with(['error' => 'unexpected error!']);
@@ -65,6 +72,7 @@ class RoleController extends Controller
     {
         try {
             $role->syncPermissions($request->get('permissions'))->update($request->validated());
+
         } catch (\Exception $exception) {
             \Log::error($exception->getMessage());
             return redirect()->route('roles.edit')->with(['error' => 'unexpected error!']);

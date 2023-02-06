@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\users;
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateUserRequest extends FormRequest
+class CreateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,12 +27,9 @@ class UpdateUserRequest extends FormRequest
         return [
             'first_name' => ['required', 'string', 'min:3', 'max:255'],
             'last_name' => ['required', 'string', 'min:3', 'max:255'],
-            'email' => [
-                'required', 'string', 'email', 'min:3', 'max:255',
-                Rule::unique('users')->ignore(request()->route()->user)
-            ],
-            'password' => ['nullable','same:password_confirmation', 'required_with:password_confirmation', 'min:6'],
-            'password_confirmation' => ['nullable','min:6'],
+            'email' => ['required', 'string', 'email', 'min:3', 'max:255', Rule::unique('users')],
+            'password' => ['required', 'same:password_confirmation', 'required_with:password_confirmation', 'min:6'],
+            'password_confirmation' => ['required', 'min:6'],
             'role' => ['nullable', 'int', 'exists:roles,id']
         ];
     }

@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\users\CreateUserRequest;
-use App\Http\Requests\users\UpdateUserRequest;
+use App\Http\Requests\User\CreateUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\Role;
 use App\Models\User;
-use App\Policies\User\UserPolicy;
-use Illuminate\Support\Facades\Auth;
 use PHPUnit\Exception;
 use function redirect;
+use function view;
 
 class UserController extends Controller
 {

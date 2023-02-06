@@ -3,8 +3,8 @@
 use App\Http\Controllers\Auth\LoginUserController;
 use App\Http\Controllers\Auth\RegisterUserController;
 use App\Http\Controllers\Dashboard\HomeController;
-use App\Http\Controllers\Dashboard\UserController;
-use App\Http\Controllers\RoleController;
+use App\Http\Controllers\Role\RoleController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
