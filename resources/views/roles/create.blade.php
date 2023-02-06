@@ -1,14 +1,4 @@
-<html dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Document</title>
-</head>
-<body>
-
+@extends('layouts.auth')
 <div class="text-center p-12 gap-12">
     <p class="mb-12">ساخت نقش جدید</p>
 
@@ -48,6 +38,3 @@
     </form>
 
 </div>
-
-</body>
-</html>

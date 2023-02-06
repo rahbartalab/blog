@@ -1,14 +1,4 @@
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Document</title>
-</head>
-<body>
-
+@extends('layouts.auth')
 <div class="text-center p-12 flex flex-col justify-center gap-12">
     <p>WELCOME {{ $user->first_name }}</p>
 
@@ -29,6 +19,3 @@
     <a href="{{ route('users.create') }}">افزودن کاربر</a>
 
 </div>
-
-</body>
-</html>
