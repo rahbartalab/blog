@@ -33,8 +33,8 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-    /* --!> manager role <!-- */
 
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
 });
-Route::resource('roles', RoleController::class);
-Route::resource('users', UserController::class);
+

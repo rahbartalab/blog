@@ -19,54 +19,54 @@ class PermissionSeeder extends Seeder
     {
         Db::table('permissions')->insert([
             [
-                'name' => 'نمایش کاربران',
+                'name' => 'users.index',
+                'fa-name' => 'نمایش کاربران',
                 'slug' => 'show-role',
                 'guard_name' => 'web',
-                'created_at' => Carbon::now()
             ]
             ,
             [
-                'name' => 'افزودن کاربر',
+                'name' => 'users.create',
+                'fa-name' => 'افزودن کاربر',
                 'slug' => 'add-role',
                 'guard_name' => 'web',
-                'created_at' => Carbon::now(),
             ],
             [
-                'name' => 'ویرایش کاربر',
+                'name' => 'users.update',
+                'fa-name' => 'ویرایش کاربر',
                 'slug' => 'edit-role',
                 'guard_name' => 'web',
-                'created_at' => Carbon::now(),
             ],
             [
-                'name' => 'حذف کاربر',
+                'name' => 'users.destroy',
+                'fa-name' => 'حذف کاربر',
                 'slug' => 'delete-role',
                 'guard_name' => 'web',
-                'created_at' => Carbon::now(),
             ],
             [
-                'name' => 'نمایش نقش ها',
+                'name' => 'roles.index',
+                'fa-name' => 'نمایش نقش ها',
                 'slug' => 'show-role',
                 'guard_name' => 'web',
-                'created_at' => Carbon::now()
             ]
             ,
             [
-                'name' => 'افزودن نقش',
+                'name' => 'roles.create',
+                'fa-name' => 'افزودن نقش',
                 'slug' => 'add-role',
                 'guard_name' => 'web',
-                'created_at' => Carbon::now(),
             ],
             [
-                'name' => 'ویرایش نقش',
+                'name' => 'roles.update',
+                'fa-name' => 'ویرایش نقش',
                 'slug' => 'edit-role',
                 'guard_name' => 'web',
-                'created_at' => Carbon::now(),
             ],
             [
-                'name' => 'حذف نقش',
+                'name' => 'roles.destroy',
+                'fa-name' => 'حذف نقش',
                 'slug' => 'delete-role',
                 'guard_name' => 'web',
-                'created_at' => Carbon::now(),
             ],
         ]);
     }

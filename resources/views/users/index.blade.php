@@ -56,7 +56,7 @@
                             <td class="px-6 text-left py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                 <a href="{{ isset($user->roles[0]) ? route('roles.show' , $user->roles[0]->id) : '' }}">
                                     <p class="text-xl">
-                                        {{ isset($user->roles[0]) ? $user->roles[0]->name : 'بدون نقش' }}
+                                        {{ isset($user->roles[0]) ? $user->roles[0]->fa_name : 'بدون نقش' }}
                                     </p>
                                 </a>
                             </td>
