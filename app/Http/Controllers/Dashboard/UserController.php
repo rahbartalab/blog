@@ -9,6 +9,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Policies\User\UserPolicy;
 use Illuminate\Support\Facades\Auth;
+use PHPUnit\Exception;
 use function redirect;
 
 class UserController extends Controller
@@ -17,6 +18,7 @@ class UserController extends Controller
     {
         $this->authorizeResource(User::class);
     }
+
     public function index()
     {
         return view('users.index', [
@@ -36,7 +38,8 @@ class UserController extends Controller
         try {
             User::create($request->validated())->assignRole($request->get('role'));
         } catch (\Exception $exception) {
-            return redirect()->back(500);
+            \Log::error($exception->getMessage());
+            return redirect()->route('users.create')->with(['error' => 'unexpected error!']);
         }
         return redirect()->route('users.index');
     }
@@ -62,7 +65,8 @@ class UserController extends Controller
         try {
             User::findOrFail($id)->syncRoles($request->get('role'))->update(array_filter($request->all()));
         } catch (\Exception $exception) {
-            return redirect()->back(500);
+            \Log::error($exception->getMessage());
+            return redirect()->route('users.edit')->with(['error' => 'unexpected error!']);
         }
 
         return redirect()->route('users.index');
@@ -70,7 +74,12 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        User::findOrFail($id)->delete();
+        try {
+            User::findOrFail($id)->delete();
+        } catch (Exception $exception) {
+            \Log::error($exception->getMessage());
+            return redirect()->route('users.index')->with(['error' => 'unexpected error!']);
+        }
 
         return redirect()->route('users.index');
     }

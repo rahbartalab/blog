@@ -22,7 +22,8 @@ class RegisterUserController extends Controller
         try {
             User::create($request->validated());
         } catch (\Exception $exception) {
-            return redirect()->back(500);
+            \Log::error($exception->getMessage());
+            return redirect()->route('register.index')->with(['error' => 'unexpected error!']);
         }
 
         return redirect()->route('login.index');

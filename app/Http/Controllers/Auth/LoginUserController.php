@@ -28,7 +28,8 @@ class LoginUserController extends Controller
             ])->onlyInput('email');
 
         } catch (\Exception $exception) {
-            return redirect()->back(500);
+            \Log::error($exception->getMessage());
+            return redirect()->route('login.index')->with(['error' => 'unexpected error!']);
         }
 
     }

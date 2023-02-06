@@ -38,10 +38,9 @@ class RoleController extends Controller
             $role = Role::create(array_merge($request->validated(), ['slug' => Role::createSlug($request->get('name'))]));
             $role->givePermissionTo($request->get('permissions'));
         } catch (Exception $exception) {
-            return redirect()->back(500);
+            \Log::error($exception->getMessage());
+            return redirect()->route('roles.create')->with(['error' => 'unexpected error!']);
         }
-
-
         return redirect()->route('roles.index');
     }
 
@@ -64,16 +63,24 @@ class RoleController extends Controller
 
     public function update(UpdateRoleRequest $request, $id)
     {
-        Role::findOrFail($id)->syncPermissions($request->get('permissions'))->update($request->validated());
-
+        try {
+            Role::findOrFail($id)->syncPermissions($request->get('permissions'))->update($request->validated());
+        } catch (\Exception $exception) {
+            \Log::error($exception->getMessage());
+            return redirect()->route('roles.edit')->with(['error' => 'unexpected error!']);
+        }
         return redirect()->route('roles.edit', $id);
     }
 
 
     public function destroy($id)
     {
-        Role::findOrFail($id)->delete();
-
+        try {
+            Role::findOrFail($id)->delete();
+        } catch (\Exception $exception) {
+            \Log::error($exception->getMessage());
+            return redirect()->route('roles.index')->with(['error' => 'unexpected error!']);
+        }
         return redirect()->route('roles.index');
     }
 }
