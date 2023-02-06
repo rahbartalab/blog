@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginUserRequest;
+use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Support\Facades\Auth;
 
 class LoginUserController extends Controller
