@@ -44,38 +44,38 @@ class UserController extends Controller
         return redirect()->route('users.index');
     }
 
-    public function show($id)
+    public function show(User $user)
     {
         return view('users.show', [
-            'user' => User::findOrFail($id)
+            'user' => $user
         ]);
     }
 
 
-    public function edit($id)
+    public function edit(User $user)
     {
         return view('users.edit', [
-            'user' => User::findOrFail($id),
+            'user' => $user,
             'roles' => Role::all()
         ]);
     }
 
-    public function update(UpdateUserRequest $request, $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
         try {
-            User::findOrFail($id)->syncRoles($request->get('role'))->update(array_filter($request->all()));
+            $user->syncRoles($request->get('role'))->update(array_filter($request->all()));
         } catch (\Exception $exception) {
             \Log::error($exception->getMessage());
-            return redirect()->route('users.edit')->with(['error' => 'unexpected error!']);
+            return redirect()->route('users.edit', $user)->with(['error' => 'unexpected error!']);
         }
 
         return redirect()->route('users.index');
     }
 
-    public function destroy($id)
+    public function destroy(User $user)
     {
         try {
-            User::findOrFail($id)->delete();
+            $user->delete();
         } catch (Exception $exception) {
             \Log::error($exception->getMessage());
             return redirect()->route('users.index')->with(['error' => 'unexpected error!']);

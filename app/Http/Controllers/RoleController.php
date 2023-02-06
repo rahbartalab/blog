@@ -45,38 +45,38 @@ class RoleController extends Controller
     }
 
 
-    public function show($id)
+    public function show(Role $role)
     {
         return view('roles.show', [
-            'role' => Role::findOrFail($id)
+            'role' => $role
         ]);
     }
 
 
-    public function edit($id)
+    public function edit(Role $role)
     {
         return view('roles.edit', [
-            'role' => Role::findOrFail($id),
+            'role' => $role,
             'permissions' => Permission::all()
         ]);
     }
 
-    public function update(UpdateRoleRequest $request, $id)
+    public function update(UpdateRoleRequest $request, Role $role)
     {
         try {
-            Role::findOrFail($id)->syncPermissions($request->get('permissions'))->update($request->validated());
+            $role->syncPermissions($request->get('permissions'))->update($request->validated());
         } catch (\Exception $exception) {
             \Log::error($exception->getMessage());
             return redirect()->route('roles.edit')->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('roles.edit', $id);
+        return redirect()->route('roles.edit', $role);
     }
 
 
-    public function destroy($id)
+    public function destroy(Role $role)
     {
         try {
-            Role::findOrFail($id)->delete();
+            $role->delete();
         } catch (\Exception $exception) {
             \Log::error($exception->getMessage());
             return redirect()->route('roles.index')->with(['error' => 'unexpected error!']);
