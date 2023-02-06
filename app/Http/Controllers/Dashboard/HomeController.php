@@ -19,4 +19,10 @@ class HomeController extends Controller
     {
         return view('dashboard.home');
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login.index');
+    }
 }

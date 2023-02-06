@@ -17,13 +17,6 @@ class UserController extends Controller
     {
         $this->authorizeResource(User::class);
     }
-
-    public function logout()
-    {
-        Auth::logout();
-        return redirect()->route('login.index');
-    }
-
     public function index()
     {
         return view('users.index', [
