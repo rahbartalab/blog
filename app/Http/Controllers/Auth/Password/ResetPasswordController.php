@@ -6,13 +6,15 @@ use App\Http\Controllers\Controller;
 
 class ResetPasswordController extends Controller
 {
-    public function index()
+    public function index($token)
     {
-        dd(request());
+        return view('auth.password.reset-password.index', [
+            'token' => $token
+        ]);
     }
 
     public function store()
     {
-
+        dd(request()->all());
     }
 }

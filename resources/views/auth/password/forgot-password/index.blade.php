@@ -4,7 +4,7 @@
         <p class="text-center mt-12 text-green-800">ایمیل بازیابی رمز عبور با موفقیت برای شما ارسال شد.</p>
     @endif;
 
-    <form action="/forgot-password" method="post">
+    <form action="{{ route('forgot-password.store') }}" method="post">
         @csrf
         <div class="text-center flex flex-col gap-12 mt-24 bg-gray-300 w-1/3 rounded-2xl mx-auto py-6">
 

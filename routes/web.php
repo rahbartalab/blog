@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', [HomeController::class, 'home'])->name('home');
+
 Route::middleware('guest')->group(function () {
     Route::prefix('register')->group(function () {
         Route::get('/', [RegisterUserController::class, 'index'])->name('register.index');
@@ -34,8 +35,11 @@ Route::middleware('guest')->group(function () {
 
     Route::resource('forgot-password', ForgotPasswordController::class)->only('index', 'store');
     /* --!> must be checked <!-- */
-    Route::resource('reset-password', ResetPasswordController::class)->only('index', 'store');
-    Route::get('reset-password', [ResetPasswordController::class, 'index'])->name('password.reset');
+    Route::prefix('reset-password/')->group(function () {
+        Route::get('{token}', [ResetPasswordController::class, 'index'])->name('password.reset');
+        Route::post('/', [ResetPasswordController::class, 'store'])->name('password.update');
+    });
+
 });
 
 
@@ -64,7 +68,7 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
 //    return $status === \Illuminate\Support\Facades\Password::RESET_LINK_SENT
 //        ? back()->with(['status' => __($status)])
 //        : back()->withErrors(['email' => __($status)]);
-//})->middleware([])->name('password.email');
+//})->middleware([])->name('password.email'); --> DONE
 //
 //Route::get('/password/{token}', function ($token) {
 //    return view('password', ['token' => $token]);
