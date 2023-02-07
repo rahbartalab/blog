@@ -1,4 +1,5 @@
 @extends('layouts.guest')
+@section('content')
 <div class="w-3/4 mx-auto p-5 text-center">
 
     <form action="{{ route('login.store') }}" method="post">
@@ -28,3 +29,4 @@
 
 
 </div>
+@endsection

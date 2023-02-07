@@ -20,14 +20,14 @@ class UserController extends Controller
 
     public function index()
     {
-        return view('users.index', [
+        return view('dashboard.users.index', [
             'users' => User::filter()->paginate(10)
         ]);
     }
 
     public function create()
     {
-        return view('users.create', [
+        return view('dashboard.users.create', [
             'roles' => Role::all()
         ]);
     }
@@ -45,7 +45,7 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        return view('users.show', [
+        return view('dashboard.users.show', [
             'user' => $user
         ]);
     }
@@ -53,7 +53,7 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        return view('users.edit', [
+        return view('dashboard.users.edit', [
             'user' => $user,
             'roles' => Role::all()
         ]);

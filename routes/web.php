@@ -31,9 +31,8 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->prefix('dashboard')->group(function () {
-
-    Route::post('/logout', [HomeController::class, 'logout'])->name('logout');
     Route::get('/', [HomeController::class, 'dashboard'])->name('dashboard');
+    Route::post('/logout', [HomeController::class, 'logout'])->name('logout');
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
 });

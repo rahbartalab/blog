@@ -1,4 +1,4 @@
-@extends('layouts.guest')
+@extends('layouts.app')
 <div class="text-center flex gap-6 mx-auto justify-center mt-5">
     @guest('web')
         <div>

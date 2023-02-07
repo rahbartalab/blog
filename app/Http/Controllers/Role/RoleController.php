@@ -20,14 +20,14 @@ class RoleController extends Controller
 
     public function index()
     {
-        return view('roles.index', [
+        return view('dashboard.roles.index', [
             'roles' => Role::filter()->paginate(10)
         ]);
     }
 
     public function create()
     {
-        return view('roles.create', [
+        return view('dashboard.roles.create', [
             'permissions' => Permission::all()
         ]);
     }
@@ -54,7 +54,7 @@ class RoleController extends Controller
 
     public function show(Role $role)
     {
-        return view('roles.show', [
+        return view('dashboard.roles.show', [
             'role' => $role
         ]);
     }
@@ -62,7 +62,7 @@ class RoleController extends Controller
 
     public function edit(Role $role)
     {
-        return view('roles.edit', [
+        return view('dashboard.roles.edit', [
             'role' => $role,
             'permissions' => Permission::all()
         ]);
