@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Policies\Role;
+namespace App\Policies;
 
 use App\Models\Role;
 use App\Models\User;
@@ -53,7 +53,10 @@ class RolePolicy
      */
     public function update(User $user, Role $role)
     {
-        return $user->can('roles.update');
+        return
+            $user->can('roles.update') and
+            $user->role->id != $role->id and
+            $role->name != 'super-admin';
     }
 
     /**
@@ -65,7 +68,10 @@ class RolePolicy
      */
     public function delete(User $user, Role $role)
     {
-        return $user->can('roles.destroy');
+        return
+            $user->can('roles.destroy') and
+            $user->role->id != $role->id and
+            $role->name != 'super-admin';
     }
 
     /**

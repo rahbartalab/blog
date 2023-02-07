@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Policies\User;
+namespace App\Policies;
 
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -52,7 +52,9 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return $user->can('users.update');
+        return
+            $user->can('users.update')
+            and ($model->role->name != 'super-admin' or $user->role->name = 'super-admin');
     }
 
     /**
@@ -64,7 +66,10 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        return $user->can('users.destroy');
+        return
+            $user->can('users.destroy') and
+            $user->id != $model->id and
+            $model->role->name != 'super-admin';
     }
 
     /**

@@ -18,8 +18,8 @@ class RoleSeeder extends Seeder
     {
         /* @var $role Role */
         $role = Role::create([
-            'name' => 'admin',
-            'slug' => 'admin',
+            'name' => 'super-admin',
+            'slug' => 'super-admin',
             'guard_name' => 'web',
             'created_at' => Carbon::now()
         ]);
