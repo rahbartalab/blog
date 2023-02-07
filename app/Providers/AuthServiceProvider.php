@@ -7,6 +7,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Policies\RolePolicy;
 use App\Policies\UserPolicy;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider

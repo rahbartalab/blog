@@ -19,7 +19,7 @@ class ProfileController extends Controller
     public function edit()
     {
         return view('dashboard.users.profile.edit', [
-            "user" => \Auth::user()
+            'user' => \Auth::user()
         ]);
     }
 
@@ -31,5 +31,16 @@ class ProfileController extends Controller
             return redirect()->route('register.index')->with(['error' => 'unexpected error!']);
         }
         return redirect()->route('profile.show', \Auth::user());
+    }
+
+
+    public function destroy()
+    {
+        try {
+            \Auth::user()->delete();
+        } catch (\Exception $exception) {
+            return redirect()->route('register.index')->with(['error' => 'unexpected error!']);
+        };
+        return redirect()->route('register.index');
     }
 }

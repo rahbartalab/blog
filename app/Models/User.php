@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Casts\Auth\PasswordCast;
+use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -50,14 +51,14 @@ use Spatie\Permission\Traits\HasRoles;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Permission\Models\Role[] $roles
  */
-class User extends Authenticatable
+class User extends Authenticatable implements CanResetPassword
 {
     use HasApiTokens,
         HasFactory,
         Notifiable,
         HasRoles,
-        SoftDeletes;
-
+        SoftDeletes,
+        \Illuminate\Auth\Passwords\CanResetPassword;
 
     protected $with = [
         'roles'
