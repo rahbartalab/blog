@@ -33,7 +33,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::get('/', [HomeController::class, 'dashboard'])->name('dashboard');
-    Route::resource('profile', ProfileController::class)->except(['store', 'create','show']);
+    Route::resource('profile', ProfileController::class)->except(['store', 'create', 'index']);
 
     Route::post('logout', [HomeController::class, 'logout'])->name('logout');
     Route::resource('roles', RoleController::class);

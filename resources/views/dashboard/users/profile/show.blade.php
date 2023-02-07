@@ -6,10 +6,10 @@
         <p>نام خانوادگی : {{ $user->last_name }}</p>
         <p class="mb-12">ایمیل : {{ $user->email }}</p>
 
-        <a href="{{ route('profile.edit' , $user->id) }}" class="bg-green-500 px-4 mb-12 py-2 text-white rounded">ویرایش
+        <a href="{{ route('profile.edit' , Auth::user()) }}" class="bg-green-500 px-4 mb-12 py-2 text-white rounded">ویرایش
             پروفایل</a>
 
-        <a href="{{ route('roles.show' , $user->role) }}" class="mt-12 block">نقش :
+        <a href="{{ route('roles.show' , Auth::user()) }}" class="mt-12 block">نقش :
             <span class="text-purple-500">{{ $user->role->name }}</span>
         </a>
 

@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 @section('content')
     <div class="text-center p-12 flex flex-col justify-center gap-12">
-        <p>WELCOME {{ $user->first_name }}</p>
+        <p class="italic text-orange-700"> Simplicity is the essence of happiness </p>
 
 
         <div class="flex gap-4 flex-col text-right">
