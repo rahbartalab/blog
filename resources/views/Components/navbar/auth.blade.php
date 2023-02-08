@@ -2,7 +2,7 @@
     <div class="flex gap-3 justify-between">
         {{--        links --}}
         <div class="flex gap-12">
-            <a href="{{ route('profile.show' , Auth::user()) }}">{{ Auth::user()->first_name.' '.Auth::user()->last_name }}</a>
+            <a href="{{ route('profile.show' , Auth::user()) }}">{{ Auth::user()->name }}</a>
             <a href="{{ route('dashboard') }}">پنل کاربری</a>
         </div>
 

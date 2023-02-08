@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Casts\Auth\EmailCast;
 use App\Casts\Auth\PasswordCast;
 use App\Notifications\Auth\VerifyEmailNotification;
 use Illuminate\Auth\Notifications\VerifyEmail;
@@ -54,6 +55,12 @@ use App\Notifications\Password\ResetPassword as ResetPasswordNotification;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Permission\Models\Role[] $roles
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|User filter()
+ * @method static \Illuminate\Database\Query\Builder|User onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|User withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|User withoutTrashed()
  */
 class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 {
@@ -97,7 +104,8 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => PasswordCast::class
+        'password' => PasswordCast::class,
+        'email' => EmailCast::class
     ];
 
 
@@ -120,6 +128,13 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
     {
         return Attribute::make(
             get: fn($value) => $this->roles[0],
+        );
+    }
+
+    protected function name(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => ucfirst($this->first_name) . ' ' . ucfirst($this->last_name),
         );
     }
 
