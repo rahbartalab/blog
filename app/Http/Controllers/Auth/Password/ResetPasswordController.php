@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\Password\ResetPasswordRequest;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use PharIo\Version\Exception;
 
 class ResetPasswordController extends Controller
 {
@@ -19,18 +20,23 @@ class ResetPasswordController extends Controller
 
     public function store(ResetPasswordRequest $request)
     {
-        $status = Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
-            function ($user, $password) {
-                $user->forceFill([
-                    'password' => $password
-                ])->setRememberToken(Str::random(60));
+        try {
+            $status = Password::reset(
+                $request->only('email', 'password', 'password_confirmation', 'token'),
+                function ($user, $password) {
+                    $user->forceFill([
+                        'password' => $password
+                    ])->setRememberToken(Str::random(60));
 
-                $user->save();
+                    $user->save();
 
-                event(new PasswordReset($user));
-            }
-        );
+                    event(new PasswordReset($user));
+                }
+            );
+        } catch (Exception $exception) {
+            return redirect()->back()->with(['error' => 'unexpected error!']);
+        }
+
 
         return $status === Password::PASSWORD_RESET
             ? redirect()->route('login.index')->with('status', __($status))

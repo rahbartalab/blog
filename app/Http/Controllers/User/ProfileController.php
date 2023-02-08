@@ -4,7 +4,6 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\Profile\UpdateProfileRequest;
-use App\Models\User;
 use function view;
 
 class ProfileController extends Controller

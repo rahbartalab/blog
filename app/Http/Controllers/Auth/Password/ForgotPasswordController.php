@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth\Password;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Password\ForgotPasswordRequest;
-use Illuminate\Auth\Notifications\ResetPassword;
 use PharIo\Version\Exception;
 
 class ForgotPasswordController extends Controller
