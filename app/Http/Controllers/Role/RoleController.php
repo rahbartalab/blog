@@ -32,7 +32,6 @@ class RoleController extends Controller
         ]);
     }
 
-
     public function store(CreateRoleRequest $request)
     {
         /* @var $role Role */
@@ -51,14 +50,12 @@ class RoleController extends Controller
         return redirect()->route('roles.index');
     }
 
-
     public function show(Role $role)
     {
         return view('dashboard.roles.show', [
             'role' => $role
         ]);
     }
-
 
     public function edit(Role $role)
     {
@@ -72,14 +69,12 @@ class RoleController extends Controller
     {
         try {
             $role->syncPermissions($request->get('permissions'))->update($request->validated());
-
         } catch (\Exception $exception) {
             \Log::error($exception->getMessage());
-            return redirect()->route('roles.edit')->with(['error' => 'unexpected error!']);
+            return redirect()->route('roles.edit', $role->id)->with(['error' => 'unexpected error!']);
         }
         return redirect()->route('roles.edit', $role);
     }
-
 
     public function destroy(Role $role)
     {

@@ -68,6 +68,24 @@ class PermissionSeeder extends Seeder
                 'slug' => 'delete-role',
                 'guard_name' => 'web',
             ],
+            [
+                'name' => 'profile.index',
+                'fa-name' => 'نمایش پروفایل',
+                'slug' => 'show-profile',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'profile.update',
+                'fa-name' => 'ویرایش پروفایل',
+                'slug' => 'edit-profile',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'profile.destroy',
+                'fa-name' => 'حذف حساب کاربری',
+                'slug' => 'delete-account',
+                'guard_name' => 'web'
+            ]
         ]);
     }
 }

@@ -95,4 +95,19 @@ class UserPolicy
     {
         //
     }
+
+    public function viewProfile(User $user): bool
+    {
+        return $user->can('profile.index');
+    }
+
+    public function updateProfile(User $user): bool
+    {
+        return $user->can('profile.update');
+    }
+
+    public function deleteAccount(User $user): bool
+    {
+        return $user->can('profile.destroy');
+    }
 }
