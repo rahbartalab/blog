@@ -51,4 +51,9 @@ class ProfileController extends Controller
         };
         return redirect()->route('register.index');
     }
+
+    public function verifyEmail()
+    {
+        return view('auth.verify-email.index');
+    }
 }

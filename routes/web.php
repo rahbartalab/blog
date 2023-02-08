@@ -4,10 +4,12 @@ use App\Http\Controllers\Auth\LoginUserController;
 use App\Http\Controllers\Auth\RegisterUserController;
 use App\Http\Controllers\Auth\Password\ForgotPasswordController;
 use App\Http\Controllers\Auth\Password\ResetPasswordController;
+use App\Http\Controllers\Auth\VerificationEmailController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\UserController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+*/;
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
 Route::middleware('guest')->group(function () {
@@ -46,59 +48,15 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::get('/', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::post('logout', [HomeController::class, 'logout'])->name('logout');
+    Route::resource('profile', ProfileController::class)->except(['store', 'create', 'index']);
 
-    Route::get('/email/verify', [HomeController::class, 'verifyEmail'])->name('verification.notice');
+    Route::prefix('email/verify')->group(function () {
+        Route::get('/', [ProfileController::class, 'verifyEmail'])->name('verification.notice');
+        Route::get('/{id}/{hash}', [VerificationEmailController::class, 'verify'])->middleware(['signed'])->name('verification.verify');
+    });
 
     Route::middleware('verified')->group(function () {
-        Route::resource('profile', ProfileController::class)->except(['store', 'create', 'index']);
         Route::resource('roles', RoleController::class);
         Route::resource('users', UserController::class);
     });
 });
-//
-//Route::get('/forgot-password', function () {
-//    return view('forgot-password');
-//})->middleware([])->name('password.request'); --> DONE
-//
-//Route::post('/forgot-password', function (\Illuminate\Http\Request $request) {
-//
-//    $request->validate(['email' => 'required|email']);
-//
-//    $status = \Illuminate\Support\Facades\Password::sendResetLink(
-//        $request->only('email')
-//    );
-//
-//
-//    return $status === \Illuminate\Support\Facades\Password::RESET_LINK_SENT
-//        ? back()->with(['status' => __($status)])
-//        : back()->withErrors(['email' => __($status)]);
-//})->middleware([])->name('password.email'); --> DONE
-//
-//Route::get('/password/{token}', function ($token) {
-//    return view('password', ['token' => $token]);
-//})->name('password.reset');
-//
-//Route::post('/password', function (\Illuminate\Http\Request $request) {
-//    $request->validate([
-//        'token' => 'required',
-//        'email' => 'required|email',
-//        'password' => 'required|min:8|confirmed',
-//    ]);
-//
-//    $status = Password::reset(
-//        $request->only('email', 'password', 'password_confirmation', 'token'),
-//        function ($user, $password) {
-//            $user->forceFill([
-//                'password' => $password
-//            ])->setRememberToken(\Illuminate\Support\Str::random(60));
-//
-//            $user->save();
-//
-//            event(new \Illuminate\Auth\Events\PasswordReset($user));
-//        }
-//    );
-//
-//    return $status === \Illuminate\Support\Facades\Password::PASSWORD_RESET
-//        ? redirect()->route('login.index')->with('status', __($status))
-//        : back()->withErrors(['email' => [__($status)]]);
-//})->middleware('guest')->name('password.update');

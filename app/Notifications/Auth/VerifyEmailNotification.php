@@ -6,9 +6,8 @@ use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
 
-class VerifyEmailNotification extends VerifyEmail implements ShouldQueue
+class VerifyEmailNotification extends VerifyEmail
 {
     use Queueable;
 
@@ -41,10 +40,11 @@ class VerifyEmailNotification extends VerifyEmail implements ShouldQueue
      */
     public function toMail($notifiable)
     {
+        $url = $this->verificationUrl($notifiable);
         return (new MailMessage)
             ->line('VERIFY EMAIL')
-            ->action('Verify', url('/'))
-            ->line('Thank you for using our application!');
+            ->action('Verify', url($url))
+            ->line('Thank you for using our application! please verify your email');
     }
 
     /**

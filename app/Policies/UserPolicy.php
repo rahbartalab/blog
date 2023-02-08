@@ -54,7 +54,7 @@ class UserPolicy
     {
         return
             $user->can('users.update')
-            and ($model->role->name != 'super-admin' or $user->role->name = 'super-admin');
+            and ((!is_null($user->role) || $user->role->name == 'super-admin') or $model->role->name != 'super-admin');
     }
 
     /**

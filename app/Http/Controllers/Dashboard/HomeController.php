@@ -20,11 +20,6 @@ class HomeController extends Controller
         return view('dashboard.home');
     }
 
-    public function verifyEmail()
-    {
-        return 'verify email';
-    }
-
     public function logout()
     {
         Auth::logout();
