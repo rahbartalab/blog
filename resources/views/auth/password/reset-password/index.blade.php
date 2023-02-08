@@ -1,6 +1,6 @@
 @extends('layouts.guest')
 @section('content')
-    <form action="{{ route('password.update') }}" method="post">
+    <form action="{{ route('reset-password.store') }}" method="post">
         @csrf
         <input type="hidden" name="token" value="{{ $token }}">
         <p class="mx-auto text-center mt-12">بازیابی رمز عبور</p>
@@ -23,10 +23,13 @@
                        class="text-center px-4 py-2 rounded bg-gray-100 text-slate-700 outline-1 outline-slate-500"
                 >
             </div>
+            @error('password')
+            <p class="text-sm text-red-500 text-center">{{ $message }}</p>
+            @enderror
 
             <div class="w-96 mx-auto text-center">
-                <label for="password" class="block mb-6"> تایید رمز عبور جدید</label>
-                <input id="password" name="password_confirmation" type="password"
+                <label for="password_confirmation" class="block mb-6"> تایید رمز عبور جدید</label>
+                <input id="password_confirmation" name="password_confirmation" type="password"
                        class="text-center px-4 py-2 rounded bg-gray-100 text-slate-700 outline-1 outline-slate-500"
                 >
             </div>

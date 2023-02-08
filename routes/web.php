@@ -36,8 +36,8 @@ Route::middleware('guest')->group(function () {
     Route::resource('forgot-password', ForgotPasswordController::class)->only('index', 'store');
     /* --!> must be checked <!-- */
     Route::prefix('reset-password/')->group(function () {
-        Route::get('{token}', [ResetPasswordController::class, 'index'])->name('password.reset');
-        Route::post('/', [ResetPasswordController::class, 'store'])->name('password.update');
+        Route::get('{token}', [ResetPasswordController::class, 'index'])->name('reset-password.index');
+        Route::post('/', [ResetPasswordController::class, 'store'])->name('reset-password.store');
     });
 
 });

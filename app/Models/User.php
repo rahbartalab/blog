@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use App\Notifications\Password\ResetPassword as ResetPasswordNotification;
 
 /**
  * App\Models\User
@@ -117,6 +118,11 @@ class User extends Authenticatable implements CanResetPassword
         return Attribute::make(
             get: fn($value) => $this->roles[0],
         );
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
     }
 
 }
