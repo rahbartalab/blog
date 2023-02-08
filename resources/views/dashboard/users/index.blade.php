@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@extends('layouts.dashboard')
 @section('content')
     <div class="flex flex-col w-3/4 mx-auto mt-12">
         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">

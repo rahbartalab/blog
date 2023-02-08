@@ -42,7 +42,6 @@ class ResetPassword extends ResetPasswordNotification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        $token = session('_token');
         return (new MailMessage)
             ->line('این ایمیل جهت بازیابی رمز عبورتان برای شما ارسال شده است.')
             ->action('بازیابی رمز عبور', url(route('reset-password.index', $this->token)))

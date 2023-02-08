@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@extends('layouts.dashboard')
 @section('content')
     <div class="w-3/4 mx-auto p-5 text-center">
 

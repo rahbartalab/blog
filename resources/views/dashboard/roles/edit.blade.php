@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@extends('layouts.dashboard')
 @section('content')
     <div class="text-center p-12 gap-12">
         <p class="mb-12">ویرایش نقش</p>
