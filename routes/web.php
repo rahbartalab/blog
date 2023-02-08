@@ -9,7 +9,6 @@ use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\UserController;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,9 +49,12 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::post('logout', [HomeController::class, 'logout'])->name('logout');
     Route::resource('profile', ProfileController::class)->except(['store', 'create', 'index']);
 
-    Route::prefix('email/verify')->group(function () {
+    Route::prefix('email/verify')->middleware('not_verified')->group(function () {
         Route::get('/', [ProfileController::class, 'verifyEmail'])->name('verification.notice');
-        Route::get('/{id}/{hash}', [VerificationEmailController::class, 'verify'])->middleware(['signed'])->name('verification.verify');
+        Route::get('/{id}/{hash}', [VerificationEmailController::class, 'verify'])
+            ->middleware('signed')->name('verification.verify');
+        Route::post('/resend', [VerificationEmailController::class, 'resendVerificationEmail'])
+            ->middleware('throttle:6,1')->name('verification.send');
     });
 
     Route::middleware('verified')->group(function () {
