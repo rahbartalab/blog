@@ -1,13 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Blog;
 
+use App\Enums\PostStatusEnum;
+use App\Enums\PostTypeEnum;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
-use Illuminate\Http\Request;
+use function dd;
+use function redirect;
+use function view;
 
 class PostController extends Controller
 {
@@ -22,14 +27,16 @@ class PostController extends Controller
     {
         return view('dashboard.posts.create', [
             'categories' => Category::all(),
-            'tags' => Tag::all()
+            'tags' => Tag::all(),
+            'type' => collect(PostTypeEnum::cases())->pluck('value')->toArray(),
+            'status' => collect(PostStatusEnum::cases())->pluck('value')->toArray()
         ]);
     }
 
+    /* these are copy & paste and must be written */
     public function store(CreatePostRequest $request)
     {
         try {
-
             dd($request->validated());
         } catch (\Exception $exception) {
             return redirect()->route('posts.create')->with(['error' => 'unexpected error!']);
