@@ -12,12 +12,9 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('post_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->text('body');
-            $table->tinyInteger('status');
+        Schema::create('category_post', function (Blueprint $table) {
+            $table->foreignId('category_id')->constrained();
+            $table->foreignId('post_id')->constrained();
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('category_post');
     }
 };
