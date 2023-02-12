@@ -4,8 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\Profile\UpdateProfileRequest;
+use App\Models\Image;
 use App\Models\User;
-use App\Policies\ProfilePolicy;
 use function view;
 
 class ProfileController extends Controller
@@ -33,7 +33,13 @@ class ProfileController extends Controller
     {
         $this->authorize('updateProfile', User::class);
         try {
+            /* --!> update user field in users table <!-- */
             \Auth::user()->update($request->validated());
+
+            /* --!> check if new image selected - do update if need <!-- */
+            if ($request->file()) {
+                updateProfileImage(\Auth::user(), $request);
+            }
         } catch (\Exception $exception) {
             return redirect()->route('register.index')->with(['error' => 'unexpected error!']);
         }

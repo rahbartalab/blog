@@ -5,6 +5,9 @@ namespace App\Http\Requests\User\Profile;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
+/**
+ * @property mixed $image
+ */
 class UpdateProfileRequest extends FormRequest
 {
     /**
@@ -31,7 +34,8 @@ class UpdateProfileRequest extends FormRequest
                 'required', 'string', 'email', 'min:3', 'max:255',
                 Rule::unique('users')->ignore(\Auth::user()->id)
             ],
-            'password' => ['required', 'current_password']
+            'password' => ['required', 'current_password'],
+            'image' => ['nullable', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048']
         ];
     }
 

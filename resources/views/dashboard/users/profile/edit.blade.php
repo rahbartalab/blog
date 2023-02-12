@@ -1,10 +1,24 @@
 @extends('layouts.users.profile')
 @section('content')
 
-    <form action="{{ route('profile.update' , Auth::user()) }}" method="post">
+    <form action="{{ route('profile.update' , Auth::user()) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
+
+
         <div class="pr-12 mt-24 flex flex-col gap-3">
+            <div class="flex gap-5 flex-col w-36">
+                <p class="text-lg font-medium">عکس پروفایل</p>
+                <div class="max-w-sm">
+                    <input type="file" name="image"
+                           class="bg-gray-400 py-2 px-4 rounded-lg shadow-sm hover:shadow focus:shadow-outline" alt="برای انتخاب کلیک کنید">
+                </div>
+            </div>
+            @error('image')
+            <p class="text-red-500 font-sm my-2">{{ $message }}</p>
+            @enderror
+
+
             <div>
                 <label for="first_name" class="block">نام : </label>
                 <input name="first_name" id="first_name" class="px-4 w-72 py-2 bg-gray-300 rounded-xl" type="text"

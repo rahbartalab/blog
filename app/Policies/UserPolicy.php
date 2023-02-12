@@ -69,7 +69,7 @@ class UserPolicy
         return
             $user->can('users.destroy') and
             $user->id != $model->id and
-            $model->role->name != 'super-admin';
+            (!$model->role or $model->role->name != 'super-admin');
     }
 
     /**

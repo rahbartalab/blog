@@ -1,6 +1,11 @@
 @extends('layouts.users.profile')
 @section('content')
 
+    @if(Auth::user()->image ?? null)
+        <img
+            src="{{ substr(Auth::user()->image->path , 20) }}"
+            alt="profile" width="100" height="100">
+    @endif;
     <div class="pr-12 mt-24">
         <p>نام : {{ $user->first_name }}</p>
         <p>نام خانوادگی : {{ $user->last_name }}</p>

@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Arr;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use App\Notifications\Password\ResetPassword as ResetPasswordNotification;
@@ -56,6 +57,7 @@ use App\Notifications\Password\ResetPassword as ResetPasswordNotification;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Permission\Models\Role[] $roles
  * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property mixed $image
  * @method static \Illuminate\Database\Eloquent\Builder|User filter()
  * @method static \Illuminate\Database\Query\Builder|User onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|User whereDeletedAt($value)
@@ -108,6 +110,15 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         'email' => EmailCast::class
     ];
 
+    /* --!> relations <!-- */
+
+    public function image(): \Illuminate\Database\Eloquent\Relations\MorphOne
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
+
+    /* --!> !!! <!-- */
+
 
     public function scopeFilter($query)
     {
@@ -127,7 +138,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
     protected function role(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $this->roles[0],
+            get: fn($value) => count($this->roles) != 0 ? $this->roles[0] : null,
         );
     }
 
