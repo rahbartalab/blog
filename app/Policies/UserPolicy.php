@@ -52,9 +52,12 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return
-            $user->can('users.update')
-            and ((!is_null($user->role) || $user->role->name == 'super-admin') or $model->role->name != 'super-admin');
+        if ($user->can('users.update')) {
+            if ((!is_null($user->role) || $user->role->name == 'super-admin') or ($model->role->name != 'super-admin')) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -66,10 +69,11 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        return
-            $user->can('users.destroy') and
-            $user->id != $model->id and
-            (!$model->role or $model->role->name != 'super-admin');
+        if ($user->can('users.destroy')) {
+            if (($user->id != $model->id) and (!$model->role or $model->role->name != 'super-admin'))
+                return true;
+        }
+        return false;
     }
 
     /**

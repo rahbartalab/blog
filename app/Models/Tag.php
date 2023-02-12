@@ -14,8 +14,12 @@ class Tag extends Model
     protected $guarded = [];
 
 
-    public function scopeFilter()
+    public function scopeFilter($query)
     {
+        /* --!> name filter <!-- */
+        $query->when(\request('name') ?? false,
+            fn($query) => $query->where('name', 'LIKE', '%' . \request('name') . '%')
+        );
 
     }
 

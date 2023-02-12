@@ -53,10 +53,12 @@ class RolePolicy
      */
     public function update(User $user, Role $role)
     {
-        return
-            $user->can('roles.update') and
-            $user->role->id != $role->id and
-            $role->name != 'super-admin';
+        if ($user->can('roles.update')) {
+            if (($user->role->id != $role->id) and ($role->name != 'super-admin')) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -68,10 +70,12 @@ class RolePolicy
      */
     public function delete(User $user, Role $role)
     {
-        return
-            $user->can('roles.destroy') and
-            $user->role->id != $role->id and
-            $role->name != 'super-admin';
+        if ($user->can('roles.destroy')) {
+            if (($user->role->id != $role->id) and ($role->name != 'super-admin')) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
