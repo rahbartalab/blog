@@ -86,6 +86,109 @@ class PermissionSeeder extends Seeder
                 'slug' => 'delete-account',
                 'guard_name' => 'web'
             ]
+            ,
+            /* --!> category <!-- */
+            [
+                'name' => 'categories.index',
+                'fa-name' => 'نمایش دسته بندی ها',
+                'slug' => 'show-categories',
+                'guard_name' => 'web',
+            ]
+            ,
+            [
+                'name' => 'categories.create',
+                'fa-name' => 'افزودن دسته بندی',
+                'slug' => 'add-category',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'categories.update',
+                'fa-name' => 'ویرایش دسته بندی',
+                'slug' => 'edit-category',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'categories.destroy',
+                'fa-name' => 'حذف دسته بندی',
+                'slug' => 'delete-category',
+                'guard_name' => 'web',
+            ]
+            ,
+            /* --!> posts <!-- */
+            [
+                'name' => 'posts.create',
+                'fa-name' => 'افزودن پست',
+                'slug' => 'add-post',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'posts.index',
+                'fa-name' => 'نمایش پست ها',
+                'slug' => 'show-post',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'posts.update',
+                'fa-name' => 'ویرایش پست ها',
+                'slug' => 'edit-posts',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'posts.destroy',
+                'fa-name' => 'حذف پست ها',
+                'slug' => 'delete-my-posts',
+                'guard_name' => 'web'
+            ],
+            /* --!> comments <!-- */
+            [
+                'name' => 'comments.create',
+                'fa-name' => 'افزودن کامنت',
+                'slug' => 'add-comment',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'comments.index',
+                'fa-name' => 'نمایش کامنت ها',
+                'slug' => 'show-comments',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'comments.update',
+                'fa-name' => 'ویرایش کامنت ها',
+                'slug' => 'edit-comments',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'comments.delete',
+                'fa-name' => 'حذف کامنت ها',
+                'slug' => 'delete-comments',
+                'guard_name' => 'web'
+            ],
+            /* --!> tags <!-- */
+            [
+                'name' => 'tags.create',
+                'fa-name' => 'افزودن تگ',
+                'slug' => 'add-tag',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'tags.index',
+                'fa-name' => 'نمایش تگ ها',
+                'slug' => 'show-tags',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'tags.update',
+                'fa-name' => 'ویرایش تگ ها',
+                'slug' => 'edit-tags',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'tags.delete',
+                'fa-name' => 'حذف تگ ها',
+                'slug' => 'delete-tags',
+                'guard_name' => 'web'
+            ],
         ]);
     }
 }
