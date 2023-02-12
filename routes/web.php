@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\VerificationEmailController;
 use App\Http\Controllers\Blog\CategoryController;
 use App\Http\Controllers\Blog\TagController;
 use App\Http\Controllers\Dashboard\HomeController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\UserController;
@@ -64,5 +65,6 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
         Route::resource('users', UserController::class);
         Route::resource('categories', CategoryController::class);
         Route::resource('tags', TagController::class);
+        Route::resource('posts', PostController::class);
     });
 });

@@ -68,7 +68,6 @@ class CategoryController extends Controller
         try {
             $category->delete();
         } catch (\Exception $exception) {
-            \Log::error($exception->getMessage());
             return redirect()->route('categories.index')->with(['error' => 'unexpected error!']);
         }
         return redirect()->route('categories.index');

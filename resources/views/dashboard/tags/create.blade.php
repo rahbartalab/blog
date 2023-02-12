@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 @section('content')
     <div class="text-center p-12 gap-12">
-        <p class="mb-12">ساخت نگ جدید</p>
+        <p class="mb-12">ساخت تگ جدید</p>
         <form action="{{ route('tags.store') }}" method="post">
             @csrf
             <div class="flex justify-center items-start gap-12">

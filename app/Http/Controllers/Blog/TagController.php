@@ -62,12 +62,11 @@ class TagController extends Controller
         return redirect()->route('tags.edit', $tag);
     }
 
-    public function destroy(tag $tag)
+    public function destroy(Tag $tag)
     {
         try {
             $tag->delete();
         } catch (\Exception $exception) {
-            \Log::error($exception->getMessage());
             return redirect()->route('tags.index')->with(['error' => 'unexpected error!']);
         }
         return redirect()->route('tags.index');

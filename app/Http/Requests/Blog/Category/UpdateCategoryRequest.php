@@ -32,7 +32,11 @@ class UpdateCategoryRequest extends FormRequest
             'slug' => [
                 'bail', 'required', 'string', 'max:255',
                 Rule::unique('categories')->ignore(request()->route('category'))],
-            'parent_id' => ['bail', 'nullable', 'integer', 'exists:categories,id']
+            'parent_id' => [
+                'bail', 'nullable', 'integer', 'exists:categories,id',
+                /* --!> a category couldn't be its parent <!-- */
+                Rule::notIn([request()->route('category')->id])
+            ]
         ];
     }
 }
