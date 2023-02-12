@@ -4,7 +4,7 @@
 @extends('layouts.dashboard')
 @section('content')
     <div class="text-center p-12 gap-12">
-        <p class="mb-12">ساخت دسته بندی جدید</p>
+        <p class="mb-12">ویرایش دسته بندی</p>
         <form action="{{ route('categories.update' , $category) }}" method="post">
             @method('patch')
             @csrf

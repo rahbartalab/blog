@@ -159,7 +159,7 @@ class PermissionSeeder extends Seeder
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'comments.delete',
+                'name' => 'comments.destroy',
                 'fa-name' => 'حذف کامنت ها',
                 'slug' => 'delete-comments',
                 'guard_name' => 'web'
@@ -184,7 +184,7 @@ class PermissionSeeder extends Seeder
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'tags.delete',
+                'name' => 'tags.destroy',
                 'fa-name' => 'حذف تگ ها',
                 'slug' => 'delete-tags',
                 'guard_name' => 'web'
