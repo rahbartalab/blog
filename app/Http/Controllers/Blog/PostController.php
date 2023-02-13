@@ -16,9 +16,14 @@ use function view;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Post::class);
+    }
+
     public function index()
     {
-        return view('dashboard.tags.index', [
+        return view('dashboard.posts.index', [
             'posts' => Post::filter()->paginate(10)
         ]);
     }
@@ -30,16 +35,52 @@ class PostController extends Controller
         return view('dashboard.posts.create', [
             'categories' => Category::all(),
             'tags' => Tag::all(),
-            'type' => collect(PostTypeEnum::cases())->pluck('value')->toArray(),
-            'status' => collect(PostStatusEnum::cases())->pluck('value')->toArray()
+            'types' => collect(PostTypeEnum::cases())->pluck('value')->toArray(),
+            'statuses' => collect(PostStatusEnum::cases())->pluck('value')->toArray()
         ]);
     }
 
     public function store(CreatePostRequest $request)
     {
+
+
+        /* @var $post Post */
         try {
-            dd($request->validated());
+            /* --!> store post fields in posts table  <!-- */
+            $postFields = (collect(array_merge($request->validated(), ['user_id' => auth()->user()->id]))
+                ->except(['tags', 'categories', 'image'])->toArray());
+            $post = Post::create($postFields);
+
+            /* --!> check if user selected ( categories | tags ) we must import relations in pivot table <!-- */
+            if ($request->validated('categories') ?? false) {
+                $post->categories()->sync($request->validated('categories'));
+            }
+
+            if ($tags = ($request->validated('tags'))) {
+                /*
+                 we have to condition
+                1. selected tag already exists in DB , so we must create a relation between those and post
+                2. tags aren't exists , first create those and next create relation
+                 */
+
+                /* --!> state 1 <!-- */
+                $relationalTags = array_intersect($dbTags = Tag::all()->pluck('name', 'id')->toArray(), $tags);
+                $post->tags()->sync(array_keys($relationalTags));
+
+                /* --!> state 2 <!-- */
+                if ($newTags = collect(array_diff($tags, $dbTags))) {
+                    array_map(fn($value) => $post->tags()->attach(Tag::create($value)), $newTags->map(fn($value) => ['name' => $value])->toArray());
+                }
+
+            }
+
+            /* --!> check for save image <!-- */
+            if ($image = $request->file('image')) {
+
+
+            }
         } catch (\Exception $exception) {
+//            dd($exception->getMessage(), $exception->getLine(), $exception->getCode());
             return redirect()->route('posts.create')->with(['error' => 'unexpected error!']);
         }
         return redirect()->route('posts.index');
@@ -82,3 +123,6 @@ class PostController extends Controller
     }
 
 }
+
+
+

@@ -63,6 +63,7 @@ use App\Notifications\Password\ResetPassword as ResetPasswordNotification;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereDeletedAt($value)
  * @method static \Illuminate\Database\Query\Builder|User withTrashed()
  * @method static \Illuminate\Database\Query\Builder|User withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|User role($roles, $guard = null)
  */
 class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 {

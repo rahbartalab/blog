@@ -4,9 +4,11 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 use App\Models\Category;
+use App\Models\Post;
 use App\Models\Role;
 use App\Models\User;
 use App\Policies\CategoryPolicy;
+use App\Policies\PostPolicy;
 use App\Policies\RolePolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -22,7 +24,8 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         User::class => UserPolicy::class,
         Role::class => RolePolicy::class,
-        Category::class => CategoryPolicy::class
+        Category::class => CategoryPolicy::class,
+        Post::class => PostPolicy::class
     ];
 
     /**

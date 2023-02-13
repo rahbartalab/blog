@@ -35,6 +35,14 @@
             @can('tags.create')
                 <a class="rounded px-12 py-4 text-blue-500" href="{{ route('tags.create') }}">افزودن تگ جدید</a>
             @endcan
+
+            @can('posts.index')
+                <a class="rounded px-12 py-4 text-blue-500" href="{{ route('posts.index') }}">نمایش پست ها</a>
+            @endcan
+
+            @can('posts.create')
+                <a class="rounded px-12 py-4 text-blue-500" href="{{ route('posts.create') }}">افزودن پست جدید</a>
+            @endcan
         </div>
 
 

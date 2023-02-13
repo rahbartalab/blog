@@ -12,6 +12,7 @@ use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\UserController;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,16 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//$inputTags = ['rsarasr', 'ورزشی', 'newOne'];
+//$dbTags = Tag::all()->pluck('name', 'id')->toArray();
+//$tag = collect(array_diff($inputTags, $dbTags));
+//
+//$post = \App\Models\Post::find(1);
+//array_map(fn($value) => $post->tags()->attach(Tag::create($value)), $tag->map(fn($value) => ['name' => $value])->toArray());
+//
+//
+//dd($post->tags);
+
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
 Route::middleware('guest')->group(function () {
