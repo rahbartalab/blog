@@ -23,6 +23,8 @@ class PostController extends Controller
         ]);
     }
 
+    /* these are copy & paste and must be written */
+
     public function create()
     {
         return view('dashboard.posts.create', [
@@ -33,7 +35,6 @@ class PostController extends Controller
         ]);
     }
 
-    /* these are copy & paste and must be written */
     public function store(CreatePostRequest $request)
     {
         try {
