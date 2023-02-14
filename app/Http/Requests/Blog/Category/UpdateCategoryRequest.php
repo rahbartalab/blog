@@ -30,7 +30,7 @@ class UpdateCategoryRequest extends FormRequest
                 Rule::unique('categories')->ignore(request()->route('category'))
             ],
             'slug' => [
-                'bail', 'required', 'string', 'max:255',
+                'bail', 'required', 'string', 'max:255', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/',
                 Rule::unique('categories')->ignore(request()->route('category'))],
             'parent_id' => [
                 'bail', 'nullable', 'integer', 'exists:categories,id',

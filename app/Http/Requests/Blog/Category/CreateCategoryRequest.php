@@ -25,7 +25,7 @@ class CreateCategoryRequest extends FormRequest
     {
         return [
             'name' => ['bail', 'required', 'string', 'max:255', 'unique:categories,name'],
-            'slug' => ['bail', 'required', 'string', 'max:255', 'unique:categories,slug'],
+            'slug' => ['bail', 'required', 'string', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', 'max:255', 'unique:categories,slug'],
             'parent_id' => ['bail', 'nullable', 'integer', 'exists:categories,id']
         ];
     }

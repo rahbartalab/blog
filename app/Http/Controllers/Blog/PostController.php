@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\Image;
 use App\Models\Post;
 use App\Models\Tag;
+use phpDocumentor\Reflection\Types\Collection;
 use function dd;
 use function redirect;
 use function view;
@@ -58,26 +59,11 @@ class PostController extends Controller
             }
 
             if ($tags = ($request->validated('tags'))) {
-                /*
-                 we have to condition
-                1. selected tag already exists in DB , so we must create a relation between those and post
-                2. tags aren't exists , first create those and next create relation
-                 */
-
-                /* --!> state 1 <!-- */
-                $relationalTags = array_intersect($dbTags = Tag::all()->pluck('name', 'id')->toArray(), $tags);
-                $post->tags()->sync(array_keys($relationalTags));
-
-                /* --!> state 2 <!-- */
-                if ($newTags = collect(array_diff($tags, $dbTags))) {
-                    array_map(fn($value) => $post->tags()->attach(Tag::create($value)), $newTags->map(fn($value) => ['name' => $value])->toArray());
-                }
-
+                updatePostTags($post, $tags);
             }
 
             /* --!> check for save image <!-- */
             if ($image = $request->file('image')) {
-                $post = Post::find(1);
                 $path = $image->store('static/images/posts');
                 Image::create([
                     'path' => $path,
@@ -103,14 +89,32 @@ class PostController extends Controller
         return view('dashboard.posts.edit', [
             'post' => $post,
             'categories' => Category::all(),
-            'tags' => Tag::all()
+            'tags' => Tag::all(),
+            'types' => collect(PostTypeEnum::cases())->pluck('value')->toArray(),
+            'statuses' => collect(PostStatusEnum::cases())->pluck('value')->toArray()
+
         ]);
     }
 
     public function update(UpdatePostRequest $request, Post $post)
     {
         try {
-            dd($request->validated());
+            $post->update(collect($request->validated())->except(['tags', 'categories', 'image'])->toArray());
+
+            if ($tags = ($request->validated('tags'))) {
+                updatePostTags($post, $tags);
+            }
+
+            if ($image = $request->file('image')) {
+                $post->image->delete();
+                $path = $image->store('static/images/posts');
+                Image::create([
+                    'path' => $path,
+                    'imageable_id' => $post->id,
+                    'imageable_type' => Post::class
+                ]);
+            }
+
         } catch (\Exception $exception) {
             return redirect()->route('posts.edit', $post)->with(['error' => 'unexpected error!']);
         }

@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Enums\PostStatusEnum;
 use App\Enums\PostTypeEnum;
+use Exception;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -90,4 +92,16 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    /**
+     * @throws Exception
+     */
+    protected function date(): Attribute
+    {
+        $date = new \DateTime($this->published_at);
+        return Attribute::make(
+            get: fn() => $date->format('Y-m-d')
+        );
+    }
+
 }

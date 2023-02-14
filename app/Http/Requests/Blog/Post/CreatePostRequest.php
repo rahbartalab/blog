@@ -36,7 +36,7 @@ class CreatePostRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:255'],
-            'slug' => ['required', 'string', 'max:255', 'unique:posts'],
+            'slug' => ['required', 'string', 'max:255', 'unique:posts', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/'],
             'excerpt' => ['required', 'string', 'max:255'],
             'body' => ['required', 'string', 'max:255'],
             'type' => [
@@ -53,8 +53,6 @@ class CreatePostRequest extends FormRequest
             'tags' => ['bail', 'nullable', 'array'],
             'tags.*' => ['max:255', new TagRule()],
             'image' => ['nullable', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048']
-
-
         ];
     }
 }
