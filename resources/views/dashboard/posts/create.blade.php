@@ -2,7 +2,7 @@
 @section('content')
     <div class="text-center p-12 gap-12">
         <p class="mb-12">ساخت پست جدید</p>
-        <form action="{{ route('posts.store') }}" method="post" name="form">
+        <form action="{{ route('posts.store') }}" method="post" name="form" enctype="multipart/form-data">
             @csrf
             <div class="flex justify-center gap-3">
                 <div class="flex justify-center items-start gap-12">
@@ -138,6 +138,9 @@
                     <div>
                         <input type="file" name="image">
                     </div>
+                    @error('image')
+                    <div class="alert alert-danger text-red-600">{{ $message }}</div>
+                    @enderror
 
                     {{--                tags - nullable --}}
                     <div>

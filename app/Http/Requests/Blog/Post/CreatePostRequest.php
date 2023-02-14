@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Blog\Post;
 
 use App\Enums\PostStatusEnum;
 use App\Enums\PostTypeEnum;
-use App\Models\Tag;
 use App\Rules\TagRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use function collect;
+use function now;
 
 class CreatePostRequest extends FormRequest
 {

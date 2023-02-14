@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Blog;
 use App\Enums\PostStatusEnum;
 use App\Enums\PostTypeEnum;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreatePostRequest;
-use App\Http\Requests\UpdatePostRequest;
+use App\Http\Requests\Blog\Post\CreatePostRequest;
+use App\Http\Requests\Blog\Post\UpdatePostRequest;
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Post;
 use App\Models\Tag;
 use function dd;
@@ -76,11 +77,15 @@ class PostController extends Controller
 
             /* --!> check for save image <!-- */
             if ($image = $request->file('image')) {
-
-
+                $post = Post::find(1);
+                $path = $image->store('static/images/posts');
+                Image::create([
+                    'path' => $path,
+                    'imageable_id' => $post->id,
+                    'imageable_type' => Post::class
+                ]);
             }
         } catch (\Exception $exception) {
-//            dd($exception->getMessage(), $exception->getLine(), $exception->getCode());
             return redirect()->route('posts.create')->with(['error' => 'unexpected error!']);
         }
         return redirect()->route('posts.index');

@@ -25,16 +25,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//$inputTags = ['rsarasr', 'ورزشی', 'newOne'];
-//$dbTags = Tag::all()->pluck('name', 'id')->toArray();
-//$tag = collect(array_diff($inputTags, $dbTags));
-//
-//$post = \App\Models\Post::find(1);
-//array_map(fn($value) => $post->tags()->attach(Tag::create($value)), $tag->map(fn($value) => ['name' => $value])->toArray());
-//
-//
-//dd($post->tags);
-
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
 Route::middleware('guest')->group(function () {
@@ -54,7 +44,6 @@ Route::middleware('guest')->group(function () {
         Route::get('{token}', [ResetPasswordController::class, 'index'])->name('reset-password.index');
         Route::post('/', [ResetPasswordController::class, 'store'])->name('reset-password.store');
     });
-
 });
 
 
