@@ -36,7 +36,7 @@
                                     {{ $category['id'] }}
                                 </td>
                                 <td class="px-6 text-left font-semibold py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                    <a href="{{ route('categories.show' , $category['id']) }}">
+                                    <a href="{{ route('categories.show' , $category) }}">
                                         {{ $category['name'] }}
                                     </a>
                                 </td>
@@ -49,12 +49,12 @@
                                 </td>
 
                                 <td class="px-6 text-left py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                    <a href="{{ route('categories.edit' , $category['id']) }}">
+                                    <a href="{{ route('categories.edit' , $category) }}">
                                         <p class="text-xl text-green-500"><i class="fa fa-edit"></i></p>
                                     </a>
                                 </td>
                                 <td class="px-6 text-left py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                    <form action="{{ route('categories.destroy' , $category['id']) }}" method="post">
+                                    <form action="{{ route('categories.destroy' , $category) }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit">

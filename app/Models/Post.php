@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\PostStatusEnum;
 use App\Enums\PostTypeEnum;
 use Exception;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -35,6 +36,8 @@ use function Symfony\Component\String\s;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
  * @property-read int|null $tags_count
  * @method static \Illuminate\Database\Eloquent\Builder|Post filter()
+ * @method static \Illuminate\Database\Eloquent\Builder|Post filterByCategories()
+ * @method static \Illuminate\Database\Eloquent\Builder|Post filterByUser()
  * @method static \Illuminate\Database\Eloquent\Builder|Post newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Post newQuery()
  * @method static \Illuminate\Database\Query\Builder|Post onlyTrashed()
@@ -67,9 +70,47 @@ class Post extends Model
         'type' => PostTypeEnum::class
     ];
 
-    public function scopeFilter()
+    public function getRouteKeyName()
     {
+        return 'slug';
+    }
 
+    public function scopeFilter($query)
+    {
+        /* --!> filter post fields <!-- */
+        $query->when(request('q') ?? false,
+            fn($query) => $query
+                    ->where('title', 'LIKE', '%' . request('q') . '%')
+                    ->orWhere('body', 'LIKE', '%' . request('q')) . '%');
+
+        $query->when(request('type') ?? false,
+            fn($query) => $query->where('type', request('type'))
+        );
+
+        $query->when(request('status') ?? false,
+            fn($query) => $query->where('status', request('status'))
+        );
+    }
+
+    public function scopeFilterByCategories(Builder $query)
+    {
+        $query->when(request('categories') ?? false,
+            fn($query) => $query->whereHas('categories',
+                fn($query) => $query->whereIn('id', request('categories'))
+            ));
+    }
+
+    public function scopeFilterByUser(Builder $query)
+    {
+        $query->when(request('user_id') ?? false,
+            fn($query) => $query->whereHas('user',
+                fn($query) => $query->where('id', request('user_id'))
+            ));
+    }
+
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
 

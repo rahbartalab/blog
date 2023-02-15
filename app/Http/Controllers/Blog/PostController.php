@@ -24,7 +24,7 @@ class PostController extends Controller
     public function index()
     {
         return view('dashboard.posts.index', [
-            'posts' => Post::filter()->paginate(10)
+            'posts' => Post::filter()->filterByCategories()->filterByUser()->paginate(10)
         ]);
     }
 
