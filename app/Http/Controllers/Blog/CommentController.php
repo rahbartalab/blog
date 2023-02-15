@@ -13,7 +13,7 @@ class CommentController extends Controller
 
     {
         return view('dashboard.comments.index', [
-            'comments' => Comment::paginate(10)
+            'comments' => Comment::filter()->filterByPost()->filterByUser()->paginate(10)
         ]);
     }
 

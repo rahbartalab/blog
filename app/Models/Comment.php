@@ -33,6 +33,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Comment whereUserId($value)
  * @method static \Illuminate\Database\Query\Builder|Comment withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Comment withoutTrashed()
+ * @method static filter()
  * @mixin \Eloquent
  */
 class Comment extends Model
@@ -42,6 +43,31 @@ class Comment extends Model
 
     protected $guarded = [];
 
+    /* --!> filter by comment's text <!-- */
+    public function scopeFilter($query)
+    {
+        $query->when(request('q') ?? false,
+            fn($query) => $query->where('body', 'LIKE', '%' . request('q') . '%')
+        );
+    }
+
+    /* --!> filter by comment's post  <!-- */
+    public function scopeFilterByPost($query)
+    {
+        $query->when(request('post_id'),
+            fn($query) => $query->whereHas('post',
+                fn($query) => $query->where('id', request('post_id')))
+        );
+    }
+
+    /* --!> filter by comment's user <!-- */
+    public function scopeFilterByUser($query)
+    {
+        $query->when(request('user_id'),
+            fn($query) => $query->whereHas('user',
+                fn($query) => $query->where('id', request('user_id')))
+        );
+    }
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
