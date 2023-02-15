@@ -28,8 +28,6 @@ class PostController extends Controller
         ]);
     }
 
-    /* these are copy & paste and must be written */
-
     public function create()
     {
         return view('dashboard.posts.create', [

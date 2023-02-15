@@ -43,9 +43,9 @@ class ProfileController extends Controller
         } catch (\Exception $exception) {
             return redirect()->route('register.index')->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('profile.show', \Auth::user());
+        return redirect()->route('profile.show', \Auth::user())
+            ->with(['updateProfileMessage' => 'ویرایش با موفقیت انجام شد.']);
     }
-
 
     public function destroy()
     {
@@ -55,7 +55,7 @@ class ProfileController extends Controller
         } catch (\Exception $exception) {
             return redirect()->route('register.index')->with(['error' => 'unexpected error!']);
         };
-        return redirect()->route('register.index');
+        return redirect()->route('register.index')->with(['deleteAccount' => 'حساب شما حذف شد.']);
     }
 
     public function verifyEmail()

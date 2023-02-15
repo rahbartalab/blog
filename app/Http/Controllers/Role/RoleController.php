@@ -44,10 +44,9 @@ class RoleController extends Controller
             $role->givePermissionTo($request->get('permissions'));
 
         } catch (Exception $exception) {
-            \Log::error($exception->getMessage());
             return redirect()->route('roles.create')->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('roles.index');
+        return redirect()->route('roles.index')->with(['createRoleMessage' => 'نقش جدید با موفقیت اضافه شد.']);
     }
 
     public function show(Role $role)
@@ -70,10 +69,9 @@ class RoleController extends Controller
         try {
             $role->syncPermissions($request->get('permissions'))->update($request->validated());
         } catch (\Exception $exception) {
-            \Log::error($exception->getMessage());
             return redirect()->route('roles.edit', $role->id)->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('roles.edit', $role);
+        return redirect()->route('roles.edit', $role)->with(['updateRoleMessage' => 'نقش مورد نظر ویرایش شد.']);
     }
 
     public function destroy(Role $role)
@@ -81,9 +79,8 @@ class RoleController extends Controller
         try {
             $role->delete();
         } catch (\Exception $exception) {
-            \Log::error($exception->getMessage());
             return redirect()->route('roles.index')->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('roles.index');
+        return redirect()->route('roles.index')->with(['deleteRoleMessage' => 'نقش حذف شد.']);
     }
 }

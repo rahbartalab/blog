@@ -37,10 +37,9 @@ class UserController extends Controller
         try {
             User::create($request->validated())->assignRole($request->get('role'));
         } catch (\Exception $exception) {
-            \Log::error($exception->getMessage());
             return redirect()->route('users.create')->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with(['createUser' => 'کاربر مورد نظر ساخته شد.']);
     }
 
     public function show(User $user)
@@ -64,11 +63,10 @@ class UserController extends Controller
         try {
             $user->syncRoles($request->get('role'))->update(array_filter($request->all()));
         } catch (\Exception $exception) {
-            \Log::error($exception->getMessage());
             return redirect()->route('users.edit', $user)->with(['error' => 'unexpected error!']);
         }
 
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with(['updateUserMessage' => 'کاربر مورد نظر ویرایش شد.']);
     }
 
     public function destroy(User $user)
@@ -76,10 +74,9 @@ class UserController extends Controller
         try {
             $user->delete();
         } catch (Exception $exception) {
-            \Log::error($exception->getMessage());
             return redirect()->route('users.index')->with(['error' => 'unexpected error!']);
         }
 
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with(['deleteUserMessage' => 'کاربر مورد نظر حذف شد.']);
     }
 }
