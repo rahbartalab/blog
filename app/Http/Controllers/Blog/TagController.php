@@ -69,6 +69,6 @@ class TagController extends Controller
         } catch (\Exception $exception) {
             return redirect()->route('tags.index')->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('tags.index');
+        return redirect()->route('tags.index')->with(['deleteTagMessage' => 'حذف تگ با موفقیت انجام شد.']);
     }
 }

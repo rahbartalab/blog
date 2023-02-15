@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginUserRequest;
-use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Support\Facades\Auth;
 
 class LoginUserController extends Controller
@@ -21,7 +20,7 @@ class LoginUserController extends Controller
             if (Auth::attempt($request->validated())) {
                 $request->session()->regenerate();
 
-                return redirect()->route('dashboard');
+                return redirect()->route('dashboard')->with(['welcome' => 'خوش آمدید']);
             }
 
             return back()->withErrors([
@@ -29,7 +28,6 @@ class LoginUserController extends Controller
             ])->onlyInput('email');
 
         } catch (\Exception $exception) {
-            \Log::error($exception->getMessage());
             return redirect()->route('login.index')->with(['error' => 'unexpected error!']);
         }
 

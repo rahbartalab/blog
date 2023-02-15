@@ -11,8 +11,6 @@ use App\Models\Category;
 use App\Models\Image;
 use App\Models\Post;
 use App\Models\Tag;
-use phpDocumentor\Reflection\Types\Collection;
-use function dd;
 use function redirect;
 use function view;
 
@@ -74,7 +72,7 @@ class PostController extends Controller
         } catch (\Exception $exception) {
             return redirect()->route('posts.create')->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index')->with(['createPostMessage' => 'پست جدید افزوده شد.']);
     }
 
     public function show(Post $post)
@@ -122,7 +120,7 @@ class PostController extends Controller
         } catch (\Exception $exception) {
             return redirect()->route('posts.edit', $post)->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('posts.edit', $post);
+        return redirect()->route('posts.edit', $post)->with(['editPostMessage' => 'ویرایش با موفقیت انجام شد.']);
     }
 
     public function destroy(Post $post)
@@ -132,7 +130,7 @@ class PostController extends Controller
         } catch (\Exception $exception) {
             return redirect()->route('posts.index')->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index')->with(['deletePostMessage' => 'حذف پست با موفقیت انجام شد.']);
     }
 
 }

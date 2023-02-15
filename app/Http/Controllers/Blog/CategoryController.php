@@ -31,11 +31,11 @@ class CategoryController extends Controller
     public function store(CreateCategoryRequest $request)
     {
         try {
-            Category::create($request->validated());
+            $category = Category::create($request->validated());
         } catch (\Exception $exception) {
             return redirect()->route('categories.create')->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.index')->with(["createCategory" => " با موفقیت اضافه شد.{$category->name} دسته بندی "]);
     }
 
     public function show(Category $category)
@@ -60,7 +60,7 @@ class CategoryController extends Controller
         } catch (\Exception $exception) {
             return redirect()->route('categories.edit', $category->id)->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('categories.edit', $category);
+        return redirect()->route('categories.edit', $category)->with(['editMessage' => 'ویرایش با موفقیت انجام شد.']);
     }
 
     public function destroy(Category $category)
@@ -70,6 +70,6 @@ class CategoryController extends Controller
         } catch (\Exception $exception) {
             return redirect()->route('categories.index')->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.index')->with(['deleteCategory' => 'دسته بندی مورد نظر حذف شد.']);
     }
 }

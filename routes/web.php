@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\Password\ResetPasswordController;
 use App\Http\Controllers\Auth\RegisterUserController;
 use App\Http\Controllers\Auth\VerificationEmailController;
 use App\Http\Controllers\Blog\CategoryController;
+use App\Http\Controllers\Blog\CommentController;
 use App\Http\Controllers\Blog\PostController;
 use App\Http\Controllers\Blog\TagController;
 use App\Http\Controllers\Dashboard\HomeController;
@@ -66,6 +67,7 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
         Route::resource('categories', CategoryController::class);
         Route::resource('tags', TagController::class);
         Route::resource('posts', PostController::class);
-        Route::resource('comments', \App\Http\Controllers\Blog\CommentController::class)->except('show');
+        /* --!> in admin panel we don't have ( create & store ) for comments <!-- */
+        Route::resource('comments', CommentController::class)->except('show', 'store', 'create');
     });
 });

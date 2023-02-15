@@ -23,10 +23,9 @@ class RegisterUserController extends Controller
             $user = User::create($request->validated());
             event(new Registered($user));
         } catch (\Exception $exception) {
-            \Log::error($exception->getMessage());
             return redirect()->route('register.index')->with(['error' => 'unexpected error!']);
         }
 
-        return redirect()->route('login.index');
+        return redirect()->route('login.index')->with(['registerMessage' => 'ثبت نام شما با موفقیت انجام شد.']);
     }
 }

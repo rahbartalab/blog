@@ -36,11 +36,11 @@ class CommentController extends Controller
 
     public function update(UpdateCommentRequest $request, Comment $comment)
     {
-//        try {
+        try {
             $comment->update($request->validated());
-//        } catch (\Exception $exception) {
-//            return redirect()->route('comments.create')->with(['error' => 'unexpected error!']);
-//        }
+        } catch (\Exception $exception) {
+            return redirect()->route('comments.create')->with(['error' => 'unexpected error!']);
+        }
         return redirect()->route('comments.index')->with(['updateComment' => 'ویرایش کامنت با موفقیت انجام شد']);
 
     }
