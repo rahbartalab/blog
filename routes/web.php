@@ -66,5 +66,6 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
         Route::resource('categories', CategoryController::class);
         Route::resource('tags', TagController::class);
         Route::resource('posts', PostController::class);
+        Route::resource('comments', \App\Http\Controllers\Blog\CommentController::class)->except('show');
     });
 });

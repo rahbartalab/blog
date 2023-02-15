@@ -105,8 +105,12 @@ class PostController extends Controller
                 updatePostTags($post, $tags);
             }
 
+            /* --!> check if user upload an image , delete post image and add new one <!-- */
             if ($image = $request->file('image')) {
-                $post->image->delete();
+                if ($post->image ?? false) {
+                    $post->image->delete();
+                }
+
                 $path = $image->store('static/images/posts');
                 Image::create([
                     'path' => $path,

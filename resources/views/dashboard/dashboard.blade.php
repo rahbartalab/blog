@@ -43,6 +43,11 @@
             @can('posts.create')
                 <a class="rounded px-12 py-4 text-blue-500" href="{{ route('posts.create') }}">افزودن پست جدید</a>
             @endcan
+
+            @can('comments.index')
+                <a class="rounded px-12 py-4 text-blue-500" href="{{ route('comments.index') }}">نمایش کامنت ها</a>
+            @endcan
+
         </div>
 
 

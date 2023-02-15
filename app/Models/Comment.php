@@ -40,6 +40,8 @@ class Comment extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $guarded = [];
+
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
@@ -48,6 +50,6 @@ class Comment extends Model
 
     public function post(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Post::class);
     }
 }
