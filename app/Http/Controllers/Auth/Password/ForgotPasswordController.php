@@ -25,6 +25,6 @@ class ForgotPasswordController extends Controller
         }
         return redirect()
             ->route('forgot-password.index')
-            ->with(['message' => 'ایمیل بازیابی رمز عبور برای شما ارسال شد.']);
+            ->with(['success' => 'ایمیل بازیابی رمز عبور برای شما ارسال شد.']);
     }
 }

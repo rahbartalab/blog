@@ -70,7 +70,7 @@ class PostController extends Controller
         } catch (\Exception $exception) {
             return redirect()->route('posts.create')->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('posts.index')->with(['createPostMessage' => 'پست جدید افزوده شد.']);
+        return redirect()->route('posts.index')->with('success', 'پست جدید افزوده شد.');
     }
 
     public function show(Post $post)
@@ -118,7 +118,7 @@ class PostController extends Controller
         } catch (\Exception $exception) {
             return redirect()->route('posts.edit', $post)->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('posts.edit', $post)->with(['editPostMessage' => 'ویرایش با موفقیت انجام شد.']);
+        return redirect()->route('posts.edit', $post)->with('success', 'ویرایش با موفقیت انجام شد.');
     }
 
     public function destroy(Post $post)
@@ -128,7 +128,7 @@ class PostController extends Controller
         } catch (\Exception $exception) {
             return redirect()->route('posts.index')->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('posts.index')->with(['deletePostMessage' => 'حذف پست با موفقیت انجام شد.']);
+        return redirect()->route('posts.index')->with('success', 'حذف پست با موفقیت انجام شد.');
     }
 
 }

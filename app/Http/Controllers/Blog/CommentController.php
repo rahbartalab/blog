@@ -41,7 +41,7 @@ class CommentController extends Controller
         } catch (\Exception $exception) {
             return redirect()->route('comments.create')->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('comments.index')->with(['updateComment' => 'ویرایش کامنت با موفقیت انجام شد']);
+        return redirect()->route('comments.index')->with('success', 'ویرایش کامنت با موفقیت انجام شد');
 
     }
 
@@ -52,6 +52,6 @@ class CommentController extends Controller
         } catch (\Exception $exception) {
             return redirect()->route('comments.index')->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('comments.index')->with(['deleteComment' => 'کامنت مورد نظر شما حذف شد']);
+        return redirect()->route('comments.index')->with('success', 'کامنت مورد نظر شما حذف شد');
     }
 }

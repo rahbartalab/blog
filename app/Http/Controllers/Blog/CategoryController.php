@@ -35,7 +35,7 @@ class CategoryController extends Controller
         } catch (\Exception $exception) {
             return redirect()->route('categories.create')->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('categories.index')->with(["createCategory" => " با موفقیت اضافه شد.{$category->name} دسته بندی "]);
+        return redirect()->route('categories.index')->with("success", " با موفقیت اضافه شد.{$category->name} دسته بندی ");
     }
 
     public function show(Category $category)

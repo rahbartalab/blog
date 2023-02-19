@@ -46,7 +46,7 @@ class RoleController extends Controller
         } catch (Exception $exception) {
             return redirect()->route('roles.create')->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('roles.index')->with(['createRoleMessage' => 'نقش جدید با موفقیت اضافه شد.']);
+        return redirect()->route('roles.index')->with('success', 'نقش جدید با موفقیت اضافه شد.');
     }
 
     public function show(Role $role)
@@ -71,7 +71,7 @@ class RoleController extends Controller
         } catch (\Exception $exception) {
             return redirect()->route('roles.edit', $role->id)->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('roles.edit', $role)->with(['updateRoleMessage' => 'نقش مورد نظر ویرایش شد.']);
+        return redirect()->route('roles.edit', $role)->with('success', 'نقش مورد نظر ویرایش شد.');
     }
 
     public function destroy(Role $role)
@@ -81,6 +81,6 @@ class RoleController extends Controller
         } catch (\Exception $exception) {
             return redirect()->route('roles.index')->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('roles.index')->with(['deleteRoleMessage' => 'نقش حذف شد.']);
+        return redirect()->route('roles.index')->with('success', 'نقش حذف شد.');
     }
 }

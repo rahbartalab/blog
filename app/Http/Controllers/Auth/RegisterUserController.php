@@ -25,6 +25,6 @@ class RegisterUserController extends Controller
             return redirect()->route('register.index')->with(['error' => 'unexpected error!']);
         }
 
-        return redirect()->route('login.index')->with(['registerMessage' => 'ثبت نام شما با موفقیت انجام شد.']);
+        return redirect()->route('login.index')->with('success', 'ثبت نام شما با موفقیت انجام شد.');
     }
 }

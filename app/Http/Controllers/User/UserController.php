@@ -39,7 +39,7 @@ class UserController extends Controller
         } catch (\Exception $exception) {
             return redirect()->route('users.create')->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('users.index')->with(['createUser' => 'کاربر مورد نظر ساخته شد.']);
+        return redirect()->route('users.index')->with('success', 'کاربر مورد نظر ساخته شد.');
     }
 
     public function show(User $user)
@@ -66,7 +66,7 @@ class UserController extends Controller
             return redirect()->route('users.edit', $user)->with(['error' => 'unexpected error!']);
         }
 
-        return redirect()->route('users.index')->with(['updateUserMessage' => 'کاربر مورد نظر ویرایش شد.']);
+        return redirect()->route('users.index')->with('success', 'کاربر مورد نظر ویرایش شد.');
     }
 
     public function destroy(User $user)
@@ -77,6 +77,6 @@ class UserController extends Controller
             return redirect()->route('users.index')->with(['error' => 'unexpected error!']);
         }
 
-        return redirect()->route('users.index')->with(['deleteUserMessage' => 'کاربر مورد نظر حذف شد.']);
+        return redirect()->route('users.index')->with('success', 'کاربر مورد نظر حذف شد.');
     }
 }

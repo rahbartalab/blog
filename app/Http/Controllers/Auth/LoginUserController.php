@@ -20,7 +20,7 @@ class LoginUserController extends Controller
             if (Auth::attempt($request->validated())) {
                 $request->session()->regenerate();
 
-                return redirect()->route('dashboard')->with(['welcome' => 'خوش آمدید']);
+                return redirect()->route('dashboard')->with('success', 'خوش آمدید',);
             }
 
             return back()->withErrors([

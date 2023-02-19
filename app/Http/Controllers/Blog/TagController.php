@@ -35,7 +35,7 @@ class TagController extends Controller
         } catch (\Exception $exception) {
             return redirect()->route('tags.create')->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('tags.index');
+        return redirect()->route('tags.index')->with('success', 'تگ مورد نظر اضافه شد.');
     }
 
     public function show(Tag $tag)
@@ -59,7 +59,7 @@ class TagController extends Controller
         } catch (\Exception $exception) {
             return redirect()->route('tags.edit', $tag->id)->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('tags.edit', $tag);
+        return redirect()->route('tags.edit', $tag)->with('success', 'تگ مورد نظر ویرایش شد.');
     }
 
     public function destroy(Tag $tag)
@@ -69,6 +69,6 @@ class TagController extends Controller
         } catch (\Exception $exception) {
             return redirect()->route('tags.index')->with(['error' => 'unexpected error!']);
         }
-        return redirect()->route('tags.index')->with(['deleteTagMessage' => 'حذف تگ با موفقیت انجام شد.']);
+        return redirect()->route('tags.index')->with('success', 'حذف تگ با موفقیت انجام شد.');
     }
 }

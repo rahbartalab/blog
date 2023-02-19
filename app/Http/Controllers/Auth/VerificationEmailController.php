@@ -17,6 +17,6 @@ class VerificationEmailController extends Controller
     {
         $request->user()->sendEmailVerificationNotification();
 
-        return back()->with('message', 'لینک تایید ایمیل برایتان ارسال شد.');
+        return back()->with('success', 'لینک تایید ایمیل برایتان ارسال شد.');
     }
 }

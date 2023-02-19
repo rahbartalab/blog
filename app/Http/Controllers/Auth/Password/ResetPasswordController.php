@@ -39,7 +39,7 @@ class ResetPasswordController extends Controller
 
 
         return $status === Password::PASSWORD_RESET
-            ? redirect()->route('login.index')->with('status', __($status))
+            ? redirect()->route('login.index')->with('success', 'رمز عبور شما با موفقیت بازیابی شد')
             : back()->withErrors(['email' => [__($status)]]);
 
     }

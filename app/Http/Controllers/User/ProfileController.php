@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\Profile\UpdateProfileRequest;
 use App\Models\Image;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use function view;
 
 class ProfileController extends Controller
@@ -17,7 +18,7 @@ class ProfileController extends Controller
     {
         $this->authorize('viewProfile', User::class);
         return view('dashboard.users.profile.show', [
-            'user' => \Auth::user()
+            'user' => Auth::user()
         ]);
     }
 
@@ -25,7 +26,7 @@ class ProfileController extends Controller
     {
         $this->authorize('updateProfile', User::class);
         return view('dashboard.users.profile.edit', [
-            'user' => \Auth::user()
+            'user' => Auth::user()
         ]);
     }
 
@@ -34,28 +35,28 @@ class ProfileController extends Controller
         $this->authorize('updateProfile', User::class);
         try {
             /* --!> update user field in users table <!-- */
-            \Auth::user()->update($request->validated());
+            Auth::user()->update($request->validated());
 
             /* --!> check if new image selected - do update if need <!-- */
             if ($request->file()) {
-                updateProfileImage(\Auth::user(), $request);
+                updateProfileImage(Auth::user(), $request);
             }
         } catch (\Exception $exception) {
             return redirect()->route('register.index')->with(['error' => 'unexpected error!']);
         }
         return redirect()->route('profile.show', \Auth::user())
-            ->with(['updateProfileMessage' => 'ویرایش با موفقیت انجام شد.']);
+            ->with('success', 'ویرایش با موفقیت انجام شد.');
     }
 
     public function destroy()
     {
         $this->authorize('deleteAccount', User::class);
         try {
-            \Auth::user()->delete();
+            Auth::user()->delete();
         } catch (\Exception $exception) {
             return redirect()->route('register.index')->with(['error' => 'unexpected error!']);
         };
-        return redirect()->route('register.index')->with(['deleteAccount' => 'حساب شما حذف شد.']);
+        return redirect()->route('register.index')->with('success', 'حساب شما حذف شد.');
     }
 
     public function verifyEmail()
