@@ -25,9 +25,14 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
         ]);
         User::factory(10)->create();
-        Category::factory(4)->create();
-        Tag::factory(20)->create();
-        Post::factory(10)->create();
+        $categories = Category::factory(4)->create();
+        $tags = Tag::factory(20)->create();
+
+        /* --!> create posts & add some relation <!-- */
+        Post::factory(10)->create()->each(function (Post $post) use ($tags, $categories) {
+            $post->tags()->attach($tags->random(3));
+            $post->categories()->attach($categories->random(2));
+        });
         Comment::factory(10)->create();
     }
 }

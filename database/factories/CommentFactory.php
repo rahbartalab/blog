@@ -20,8 +20,8 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            'post_id' => random_int(1, count(Post::all())),
-            'user_id' => random_int(1, count(User::all())),
+            'post_id' => $postId = random_int(1, count(Post::all())),
+            'user_id' => $userId = random_int(1, count(User::all())),
             'body' => fake()->text
         ];
     }
