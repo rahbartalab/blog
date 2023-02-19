@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', [HomeController::class, 'home'])->name('home');
-Route::middleware('guest')->group(__DIR__ . './web/guestRoutes.php');
-Route::middleware('auth')->prefix('dashboard')->group(__DIR__ . 'web/authRoutes.php');
+require_once 'web/guestRoutes.php';
+require_once 'web/authRoutes.php';
