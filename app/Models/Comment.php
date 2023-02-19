@@ -79,3 +79,4 @@ class Comment extends Model
         return $this->belongsTo(Post::class);
     }
 }
+
