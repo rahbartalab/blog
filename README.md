@@ -18,7 +18,7 @@ some of technologies and laravel features use in this project
 <ol>
 <li>Download the archive or clone the project using git</li>
 <li>Create database schema</li>
-<li>Create <span style="font-weight: bold; color: antiquewhite">.env</span> file from <span style="font-weight: bold ; color: antiquewhite">.env.example</span> file and adjust parameters</li>
+<li>Create <span style="font-weight: bold; color: antiquewhite">`.env`</span> file from <span style="font-weight: bold ; color: antiquewhite">.env.example</span> file and adjust parameters</li>
 <li>Run <span style="font-weight: bold; color: antiquewhite">composer install</span> </li>
 <li>Run migrations by executing <span style="font-weight: bold; color: antiquewhite">php artisan migrate --seed</span></li>
 <li>Start the server using <span style="font-weight: bold; color: antiquewhite">php artisan serve</span></li>
